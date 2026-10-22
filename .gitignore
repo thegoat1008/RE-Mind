@@ -1,0 +1,19 @@
+.DS_Store
+.env
+.env.*
+!.env.example
+backend/certs/*
+!backend/certs/.gitkeep
+.idea/
+.vscode/
+
+# Java / Gradle
+backend/.gradle/
+backend/build/
+
+# Node / Vite
+frontend/node_modules/
+frontend/dist/
+
+# Logs
+*.log
