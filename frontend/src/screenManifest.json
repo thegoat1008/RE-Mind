@@ -1,0 +1,282 @@
+[
+  {
+    "key": "family-email",
+    "id": "5:1239",
+    "name": "11-1 가족 이메일 관리",
+    "width": 402,
+    "height": 874
+  },
+  {
+    "key": "settings",
+    "id": "16:1350",
+    "name": "11 내 설정",
+    "width": 402,
+    "height": 874
+  },
+  {
+    "key": "post",
+    "id": "16:1195",
+    "name": "10-2 글 상세",
+    "width": 402,
+    "height": 874
+  },
+  {
+    "key": "write-post",
+    "id": "16:1131",
+    "name": "10-1 글쓰기",
+    "width": 402,
+    "height": 874
+  },
+  {
+    "key": "community",
+    "id": "5:1329",
+    "name": "10 커뮤니티",
+    "width": 402,
+    "height": 874
+  },
+  {
+    "key": "chat",
+    "id": "5:1291",
+    "name": "09 AI 챗팅",
+    "width": 402,
+    "height": 874
+  },
+  {
+    "key": "add-event",
+    "id": "5:1129",
+    "name": "08-1 일정 추가",
+    "width": 402,
+    "height": 874
+  },
+  {
+    "key": "calendar",
+    "id": "5:923",
+    "name": "08 캘린더",
+    "width": 402,
+    "height": 874
+  },
+  {
+    "key": "notifications",
+    "id": "16:1277",
+    "name": "07-2 알림",
+    "width": 402,
+    "height": 874
+  },
+  {
+    "key": "home",
+    "id": "5:1549",
+    "name": "07-1 홈",
+    "width": 402,
+    "height": 874
+  },
+  {
+    "key": "home-empty",
+    "id": "5:1485",
+    "name": "07 홈 · 처음 시작",
+    "width": 402,
+    "height": 874
+  },
+  {
+    "key": "care-registration",
+    "id": "5:882",
+    "name": "05 돌봄 대상 등록",
+    "width": 402,
+    "height": 874
+  },
+  {
+    "key": "email-setup",
+    "id": "5:1523",
+    "name": "06 가족 이메일 설정",
+    "width": 402,
+    "height": 874
+  },
+  {
+    "key": "signup-complete",
+    "id": "16:1077",
+    "name": "04-1 가입 완료",
+    "width": 402,
+    "height": 874
+  },
+  {
+    "key": "verify",
+    "id": "5:1469",
+    "name": "04 계정 인증",
+    "width": 402,
+    "height": 874
+  },
+  {
+    "key": "signup",
+    "id": "5:1430",
+    "name": "03 회원가입",
+    "width": 402,
+    "height": 874
+  },
+  {
+    "key": "forgot-password",
+    "id": "16:1018",
+    "name": "02-1 비밀번호 찾기",
+    "width": 402,
+    "height": 874
+  },
+  {
+    "key": "login",
+    "id": "5:1402",
+    "name": "02 로그인",
+    "width": 402,
+    "height": 874
+  },
+  {
+    "key": "welcome",
+    "id": "5:848",
+    "name": "01 RE:MIND",
+    "width": 402,
+    "height": 874
+  },
+  {
+    "key": "hospitals",
+    "id": "47:1101",
+    "name": "11-2 병원 찾기",
+    "width": 402,
+    "height": 874
+  },
+  {
+    "key": "policies",
+    "id": "47:1196",
+    "name": "11-3 치매 정책 안내",
+    "width": 402,
+    "height": 874
+  },
+  {
+    "key": "emergency",
+    "id": "47:1283",
+    "name": "11-4 긴급 안내",
+    "width": 402,
+    "height": 874
+  },
+  {
+    "key": "chat-voice",
+    "id": "47:1381",
+    "name": "09-1 AI 챗팅 · 음성 입력",
+    "width": 402,
+    "height": 874
+  },
+  {
+    "key": "check-intro",
+    "id": "68:1151",
+    "name": "05-1 치매 체크 · 안내",
+    "width": 402,
+    "height": 874
+  },
+  {
+    "key": "check-question",
+    "id": "68:1217",
+    "name": "05-2 치매 체크 · 질문",
+    "width": 402,
+    "height": 874
+  },
+  {
+    "key": "check-result",
+    "id": "68:1284",
+    "name": "05-3 치매 체크 · 결과 (상담 권장)",
+    "width": 402,
+    "height": 874
+  },
+  {
+    "key": "check-clear",
+    "id": "68:1356",
+    "name": "05-4 치매 체크 · 결과 (이상 없음)",
+    "width": 402,
+    "height": 874
+  },
+  {
+    "key": "chat-modes",
+    "id": "70:1314",
+    "name": "09-2 AI 챗팅 · 모드 선택",
+    "width": 402,
+    "height": 874
+  },
+  {
+    "key": "chat-history",
+    "id": "70:1424",
+    "name": "09-3 AI 챗팅 · 이전 대화",
+    "width": 402,
+    "height": 874
+  },
+  {
+    "key": "chat-crisis",
+    "id": "70:1506",
+    "name": "09-4 AI 챗팅 · 위기 안내",
+    "width": 402,
+    "height": 874
+  },
+  {
+    "key": "write-mode",
+    "id": "71:1483",
+    "name": "10-3 글쓰기 · 모드 선택",
+    "width": 402,
+    "height": 874
+  },
+  {
+    "key": "empathy-post",
+    "id": "71:1575",
+    "name": "10-4 글 상세 · 공감 모드",
+    "width": 402,
+    "height": 874
+  },
+  {
+    "key": "email-schedule",
+    "id": "74:1543",
+    "name": "11-5 자동 발송 수정",
+    "width": 402,
+    "height": 874
+  },
+  {
+    "key": "send-email",
+    "id": "74:1577",
+    "name": "08-5 이메일로 보내기",
+    "width": 402,
+    "height": 874
+  },
+  {
+    "key": "quiz",
+    "id": "75:1610",
+    "name": "07-3 치매 상식 · 퀴즈",
+    "width": 402,
+    "height": 874
+  },
+  {
+    "key": "quiz-answer",
+    "id": "75:1644",
+    "name": "07-4 치매 상식 · 해설",
+    "width": 402,
+    "height": 874
+  },
+  {
+    "key": "family-record",
+    "id": "75:1678",
+    "name": "07-5 치매 상식 · 우리 가족 기록",
+    "width": 402,
+    "height": 874
+  },
+  {
+    "key": "event-detail",
+    "id": "77:1707",
+    "name": "08-2 일정 상세",
+    "width": 402,
+    "height": 874
+  },
+  {
+    "key": "delete-event",
+    "id": "77:1776",
+    "name": "08-3 일정 삭제 확인",
+    "width": 402,
+    "height": 874
+  },
+  {
+    "key": "event-voice",
+    "id": "77:1822",
+    "name": "08-4 말로 일정 추가",
+    "width": 402,
+    "height": 874
+  }
+]
