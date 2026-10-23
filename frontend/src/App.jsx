@@ -15,7 +15,7 @@ const parents = {
   notifications: 'home', 'add-event': 'calendar', 'event-detail': 'calendar',
   'delete-event': 'event-detail', 'event-voice': 'calendar', 'family-calendar': 'family-codes',
   'chat-voice': 'chat', 'chat-history': 'chat-modes', 'chat-crisis': 'chat',
-  'write-mode': 'community', 'write-post': 'community', post: 'community', 'empathy-post': 'community',
+  'write-post': 'community', post: 'community', 'empathy-post': 'community',
   'family-codes': 'settings', hospitals: 'settings', policies: 'settings', emergency: 'settings',
 }
 function currentScreen(route) {
@@ -147,7 +147,6 @@ export default function App() {
     if (communityScreens.has(screen)) {
       if (name === '뒤로 버튼') return community.back()
       if (name === '글쓰기 FAB') return community.go('write-post')
-      if (screen === 'write-mode' && name === '모드 카드') return community.chooseMode(/공감/.test(label) ? 'EMPATHY' : 'SOLUTION')
       if (screen === 'write-post' && ['말로 쓰기', 'icon/mic'].includes(name)) return community.dictate()
       if (['post', 'empathy-post'].includes(screen) && name === 'icon/mic') return community.dictate('comment')
       if (['post', 'empathy-post'].includes(screen) && name === '보내기') return community.addComment()

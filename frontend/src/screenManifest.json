@@ -182,13 +182,6 @@
     "height": 874
   },
   {
-    "key": "write-mode",
-    "id": "179:7522",
-    "name": "10-3 글쓰기 · 모드 선택",
-    "width": 402,
-    "height": 874
-  },
-  {
     "key": "event-detail",
     "id": "179:7724",
     "name": "08-2 일정 상세",

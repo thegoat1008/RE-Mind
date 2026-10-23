@@ -3,13 +3,13 @@ import { api, getSession } from './api.js'
 
 export const CommunityContext = createContext(null)
 export const useCommunityData = () => useContext(CommunityContext)
-export const communityScreens = new Set(['community', 'write-mode', 'write-post', 'post', 'empathy-post'])
+export const communityScreens = new Set(['community', 'write-post', 'post', 'empathy-post'])
 const draftKey = 'remind-community-draft-v1'
 const blank = { mode: 'SOLUTION', title: '', content: '' }
 function readDraft() {
   try {
     const saved = JSON.parse(localStorage.getItem(draftKey) || 'null')
-    return { mode: saved?.mode === 'EMPATHY' ? 'EMPATHY' : 'SOLUTION', title: String(saved?.title || ''), content: String(saved?.content || '') }
+    return { mode: 'SOLUTION', title: String(saved?.title || ''), content: String(saved?.content || '') }
   } catch { return { ...blank } }
 }
 const isId = value => /^[1-9]\d*$/.test(value || '')
@@ -125,10 +125,6 @@ export function useCommunity({ screen, route, notify }) {
     try { await action() } catch (error) { notify(error.message || '처리하지 못했어요. 다시 시도해 주세요.') }
     finally { lock.current = false; setBusy(false) }
   }
-  function chooseMode(value) {
-    setDraft(current => ({ ...current, mode: value }))
-    go('write-post')
-  }
   function openPost(value) { go(`post?id=${value.id}`) }
   function save() {
     if (!form || formError) return
@@ -204,7 +200,7 @@ export function useCommunity({ screen, route, notify }) {
     try { engine.start(); setListening(true) } catch { notify('마이크를 시작하지 못했어요.'); setListening(false) }
   }
 
-  return { screen, session, form, formError, editId, busy, listening, setField, chooseMode, save, dictate,
+  return { screen, session, form, formError, editId, busy, listening, setField, save, dictate,
     searchOpen, setSearchOpen, query, setQuery, mode, sort, mine, page, list, listError, refresh,
     filter: value => { setMode(value); setPage(0) },
     order: value => { setSort(value); setPage(0) },
