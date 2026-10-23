@@ -1,5 +1,7 @@
 # RE-mind
 
+> 커뮤니티 구현용 복사본입니다. 추가 기능과 실행·원복 방법은 [COMMUNITY.md](COMMUNITY.md)를 참고하세요.
+
 Spring Boot + React(JavaScript) + Aiven MySQL 웹앱입니다.
 
 ## 필요한 프로그램

@@ -2,6 +2,9 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
 import { h, Fragment } from "../designRuntime.jsx";
+import { useCommunityData, timeAgo } from "../community/useCommunity.js";
+import { Message, PostActions, PostState, ListTools } from "../community/Bindings.jsx";
+
 
 const imgStatusDarkBackgroundMask = `/assets/figma/c9227.svg`;
 const imgNetworkSignalDark = `/assets/figma/4c652.svg`;
@@ -18,9 +21,9 @@ const imgGroup1 = `/assets/figma/9a8d3.svg`;
 const imgGroup2 = `/assets/figma/acaf5.svg`;
 const imgGroup3 = `/assets/figma/f1834.svg`;
 const imgGroup4 = `/assets/figma/07ec0.svg`;
-function Chip({ className, label = "칩", state = "default" }) {
+function Chip({ className, label = "칩", state = "default", onClick }) {
   const isActive = state === "active";
-  return <div className={className || ` design-89 ${isActive ? "design-2" : "design-1"}`} id={isActive ? "node-24_976" : "node-24_974"}>
+  return <div onClick={onClick} aria-pressed={isActive} className={className || ` design-89 ${isActive ? "design-2" : "design-1"}`} id={isActive ? "node-24_976" : "node-24_974"}>
       {state === "default" && <p className="design-47" data-node-id="24:975">
           {label}
         </p>}
@@ -30,6 +33,7 @@ function Chip({ className, label = "칩", state = "default" }) {
     </div>;
 }
 export default function Component10() {
+  const community = useCommunityData();
   return <div className="design-5" data-node-id="5:1329" data-name="10 커뮤니티">
       <div className="design-131" data-node-id="5:1330" data-name="iPhone 16 & 17 Pro - 2">
         <div className="design-7" data-node-id="I5:1330;486:2224" data-name="Status">
@@ -68,16 +72,17 @@ export default function Component10() {
           <p className="design-133" data-node-id="5:1333">
             보호자 커뮤니티
           </p>
-          <div className="design-134" data-node-id="5:1334" data-name="검색">
+          <div className="design-134" data-node-id="5:1334" data-name="검색" onClick={() => community.setSearchOpen(!community.searchOpen)} aria-label="검색 및 정렬" aria-expanded={community.searchOpen}>
             <div className="design-94" data-node-id="5:1335" data-name="icon/search">
               <img alt="" className="design-9" src={imgIconSearch} />
             </div>
           </div>
         </div>
+        <ListTools />
         <div className="design-135" data-node-id="5:1338" data-name="카테고리">
-          <Chip className="design-73 instance-community-0" label="전체" state="active" />
-          <Chip className="design-72 instance-community-1" label="해결책" />
-          <Chip className="design-72 instance-community-2" label="공감" />
+          <Chip className={`${community.mode === "ALL" ? "design-73" : "design-72"} instance-community-0`} label="전체" state={community.mode === "ALL" ? "active" : "default"} onClick={() => community.filter("ALL")} />
+          <Chip className={`${community.mode === "SOLUTION" ? "design-73" : "design-72"} instance-community-1`} label="해결책" state={community.mode === "SOLUTION" ? "active" : "default"} onClick={() => community.filter("SOLUTION")} />
+          <Chip className={`${community.mode === "EMPATHY" ? "design-73" : "design-72"} instance-community-2`} label="공감" state={community.mode === "EMPATHY" ? "active" : "default"} onClick={() => community.filter("EMPATHY")} />
         </div>
         <a className="design-136" data-node-id="5:1397" data-name="글쓰기 FAB">
           <div className="design-94" data-node-id="5:1398" data-name="icon/edit">
@@ -87,121 +92,38 @@ export default function Component10() {
             글쓰기
           </p>
         </a>
-        <div className="design-138" data-node-id="29:968" data-name="Scroll">
-          <a className="design-139" data-node-id="5:1343" data-name="게시글">
+        <div className="design-138" data-node-id="29:968" data-community-list="true" data-name="Scroll">
+          {community.listError || !community.list ? <Message error={community.listError} loading={!community.listError} /> : community.list.items.length === 0 ? <Message /> : community.list.items.map(post => (
+          <a key={post.id} onClick={() => community.openPost(post)} aria-label={post.title} data-community-card="true" className="design-139" data-node-id="5:1343" data-name="게시글">
             <div className="design-140" data-node-id="5:1344" data-name="Frame">
               <div className="design-99" data-node-id="5:1345" data-name="tag">
-                <p className="design-31" data-node-id="5:1346">
-                  해결책을 주세요
-                </p>
+                <p className="design-31" data-node-id="5:1346">{post.mode === "EMPATHY" ? "공감만 해주세요" : "해결책을 주세요"}</p>
               </div>
               <div className="design-141" data-node-id="5:1347" data-name="Frame" />
-              <p className="design-142" data-node-id="5:1348">
-                30분 전
-              </p>
+              <p className="design-142" data-node-id="5:1348">{timeAgo(post.createdAt)}</p>
             </div>
-            <p className="design-143" data-node-id="5:1349">
-              밤마다 깨시는 어머니, 이렇게 해봤어요
-            </p>
-            <p className="design-144" data-node-id="5:1350">
-              <span className="original-text-line">저녁 산책을 30분 늘리고 낮잠을 줄였더니 훨씬</span><span className="original-text-line">안정되셨어요. 비슷한 경험 있으신 분 계신가요?</span>
-            </p>
+            <p className="design-143" data-node-id="5:1349" data-live-text="true">{post.title}</p>
+            <p className="design-144" data-node-id="5:1350" data-live-text="true">{post.content}</p>
             <div className="design-145" data-node-id="5:1351" data-name="Frame">
               <div className="design-146" data-node-id="5:1352" data-name="icon/heart">
                 <img alt="" className="design-9" src={imgIconHeart} />
               </div>
-              <p className="design-147" data-node-id="5:1354">
-                24
-              </p>
+              <p className="design-147" data-node-id="5:1354">{post.likeCount}</p>
               <div className="design-148" data-node-id="5:1355" data-name="Rectangle" />
               <div className="design-146" data-node-id="5:1356" data-name="icon/msg">
                 <img alt="" className="design-9" src={imgIconMsg} />
               </div>
-              <p className="design-147" data-node-id="5:1358">
-                8
-              </p>
+              <p className="design-147" data-node-id="5:1358">{post.mode === "EMPATHY" ? "댓글 없음" : post.commentCount}</p>
               <div className="design-141" data-node-id="5:1359" data-name="Frame" />
-              <p className="design-142" data-node-id="5:1360">
-                부끄러운 햄스터
-              </p>
+              <p className="design-142" data-node-id="5:1360">{post.nickname}</p>
             </div>
           </a>
-          <div className="design-149" data-node-id="5:1361" data-name="게시글">
-            <div className="design-140" data-node-id="5:1362" data-name="Frame">
-              <div className="design-99" data-node-id="5:1363" data-name="tag">
-                <p className="design-55" data-node-id="5:1364">
-                  공감만 해주세요
-                </p>
-              </div>
-              <div className="design-141" data-node-id="5:1365" data-name="Frame" />
-              <p className="design-101" data-node-id="5:1366">
-                2시간 전
-              </p>
-            </div>
-            <p className="design-150" data-node-id="5:1367">
-              혼자 감당하기 지칠 때 어떻게 하세요?
-            </p>
-            <p className="design-151" data-node-id="5:1368">
-              요즘 잠도 못 자고 마음이 무거워요. 다들 어떻게 버티고 계신지 궁금해서 글 남겨요.
-            </p>
-            <div className="design-145" data-node-id="5:1369" data-name="Frame">
-              <div className="design-146" data-node-id="5:1370" data-name="icon/heart">
-                <img alt="" className="design-9" src={imgIconHeart} />
-              </div>
-              <p className="design-80" data-node-id="5:1372">
-                41
-              </p>
-              <div className="design-148" data-node-id="5:1373" data-name="Rectangle" />
-              <div className="design-146" data-node-id="5:1374" data-name="icon/msg">
-                <img alt="" className="design-9" src={imgIconMsg} />
-              </div>
-              <p className="design-80" data-node-id="5:1376">
-                12
-              </p>
-              <div className="design-141" data-node-id="5:1377" data-name="Frame" />
-              <p className="design-101" data-node-id="5:1378">
-                외향적인 고릴라
-              </p>
-            </div>
-          </div>
-          <div className="design-149" data-node-id="5:1379" data-name="게시글">
-            <div className="design-140" data-node-id="5:1380" data-name="Frame">
-              <div className="design-99" data-node-id="5:1381" data-name="tag">
-                <p className="design-55" data-node-id="5:1382">
-                  해결책을 주세요
-                </p>
-              </div>
-              <div className="design-141" data-node-id="5:1383" data-name="Frame" />
-              <p className="design-101" data-node-id="5:1384">
-                어제
-              </p>
-            </div>
-            <p className="design-150" data-node-id="5:1385">
-              장기요양등급 신청, 이것만 준비하세요
-            </p>
-            <p className="design-151" data-node-id="5:1386">
-              신청 서류와 방문 조사 때 꼭 말씀드려야 할 내용을 정리했어요. 저장해 두세요.
-            </p>
-            <div className="design-145" data-node-id="5:1387" data-name="Frame">
-              <div className="design-146" data-node-id="5:1388" data-name="icon/heart">
-                <img alt="" className="design-9" src={imgIconHeart} />
-              </div>
-              <p className="design-80" data-node-id="5:1390">
-                63
-              </p>
-              <div className="design-148" data-node-id="5:1391" data-name="Rectangle" />
-              <div className="design-146" data-node-id="5:1392" data-name="icon/msg">
-                <img alt="" className="design-9" src={imgIconMsg} />
-              </div>
-              <p className="design-80" data-node-id="5:1394">
-                17
-              </p>
-              <div className="design-141" data-node-id="5:1395" data-name="Frame" />
-              <p className="design-101" data-node-id="5:1396">
-                졸린 판다
-              </p>
-            </div>
-          </div>
+          ))}
+          {community.list?.totalPages > 1 && <div className="design-116">
+            <button className="design-55" disabled={community.page === 0} onClick={() => community.setPage(community.page - 1)}>이전</button>
+            <span className="design-56">{community.page + 1} / {community.list.totalPages}</span>
+            <button className="design-55" disabled={!community.list.hasNext} onClick={() => community.setPage(community.page + 1)}>다음</button>
+          </div>}
         </div>
       </div>
       <div className="design-75" data-node-id="13:1188" data-name="TabBar (앱 화면)">

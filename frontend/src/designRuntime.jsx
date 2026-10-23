@@ -96,8 +96,26 @@ function ActionNode({ element, children, ...props }) {
 // Figma screen components use this adapter to share form and navigation behavior.
 export function h(type, props, ...children) {
   if (typeof type !== 'string') return React.createElement(type, props, ...children)
+  // Explicit bindings on existing design elements take precedence over prototype actions.
+  if (typeof props?.onClick === 'function') {
+    const Tag = type === 'a' ? 'div' : type
+    const native = ['button', 'input', 'select', 'textarea'].includes(Tag)
+    const activate = event => {
+      event.stopPropagation()
+      if (!props.disabled) props.onClick(event)
+    }
+    return React.createElement(Tag, { ...props, onClick: activate,
+      ...(!native ? { role: 'button', tabIndex: props.disabled ? -1 : 0,
+        'aria-disabled': props.disabled || undefined,
+        onKeyDown: event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); activate(event) } },
+      } : {}),
+    }, ...children)
+  }
   const name = props?.['data-name'] || ''
   const nodeId = props?.['data-node-id'] || ''
+  if (name === '게시글' && ['16:1233', '71:1594'].includes(nodeId)) {
+    return React.createElement(type, props, ...children)
+  }
   if (name.startsWith('code/')) return React.createElement(CodeSlot, props, ...children)
   if (name === 'input' || name === 'textarea' || name === '검색') {
     return React.createElement(InputSlot, props, ...children)

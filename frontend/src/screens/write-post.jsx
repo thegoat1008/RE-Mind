@@ -2,6 +2,9 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
 import { h, Fragment } from "../designRuntime.jsx";
+import { useCommunityData, timeAgo } from "../community/useCommunity.js";
+import { Message, PostActions, PostState, ListTools } from "../community/Bindings.jsx";
+
 
 const imgStatusDarkBackgroundMask = `/assets/figma/c9227.svg`;
 const imgNetworkSignalDark = `/assets/figma/4c652.svg`;
@@ -12,8 +15,8 @@ const img941 = `/assets/figma/a1382.svg`;
 const imgIconChevL = `/assets/figma/fa782.svg`;
 const imgGroup = `/assets/figma/bc8db.svg`;
 const imgGroup1 = `/assets/figma/3bacc.svg`;
-function Button({ className, label = "버튼", type = "primary" }) {
-  return <div className={className || "design-113"} data-node-id="24:967">
+function Button({ className, label = "버튼", type = "primary", disabled, onClick }) {
+  return <div onClick={onClick} disabled={disabled} aria-busy={disabled} className={className || "design-113"} data-node-id="24:967">
       <p className="design-3" data-node-id="24:968">
         {label}
       </p>
@@ -27,6 +30,7 @@ function Chip({ className, label = "칩", state = "active" }) {
     </div>;
 }
 export default function Component101() {
+  const community = useCommunityData();
   return <div className="design-5" data-node-id="16:1131" data-name="10-1 글쓰기">
       <div className="design-6" data-node-id="16:1132" data-name="Status Bar">
         <div className="design-7" data-node-id="I16:1132;486:2224" data-name="Status">
@@ -67,27 +71,20 @@ export default function Component101() {
               <img alt="" className="design-9" src={imgIconChevL} />
             </div>
           </a>
-          <p className="design-23" data-node-id="16:1168">
-            글쓰기
-          </p>
+          <p className="design-23" data-node-id="16:1168">{community.editId ? "글 수정" : "글쓰기"}</p>
         </div>
         <div className="design-116" data-node-id="71:1561" data-name="선택한 모드">
-          <Chip className="design-73 instance-write-post-0" label="해결책을 주세요" />
-          <p className="design-117" data-node-id="71:1564">
-            댓글이 열려요
-          </p>
-          <p className="design-55" data-node-id="71:1565">
-            바꾸기
-          </p>
+          <Chip className="design-73 instance-write-post-0" label={community.form?.mode === "EMPATHY" ? "공감만 해주세요" : "해결책을 주세요"} />
+          <p className="design-117" data-node-id="71:1564">{community.form?.mode === "EMPATHY" ? "댓글 없이 마음만 나눠요" : "댓글이 열려요"}</p>
+          <p className="design-55" data-node-id="71:1565">{community.editId ? "모드 유지" : "바꾸기"}</p>
         </div>
         <div className="design-61" data-node-id="16:1178" data-name="field/제목">
           <p className="design-80" data-node-id="16:1179">
             제목
           </p>
           <div className="design-118" data-node-id="16:1180" data-name="input">
-            <p className="design-119" data-node-id="16:1181">
-              제목을 입력하세요
-            </p>
+            <input className="design-119 design-input" aria-label="제목" placeholder="제목을 입력하세요" maxLength={120} disabled={!community.form || community.busy}
+              value={community.form?.title || ""} onChange={event => community.setField("title", event.target.value)} />
           </div>
         </div>
         <div className="design-61" data-node-id="16:1182" data-name="field/내용">
@@ -95,10 +92,8 @@ export default function Component101() {
             내용
           </p>
           <div className="design-120" data-node-id="16:1184" data-name="textarea">
-            <div className="design-121" data-node-id="16:1185">
-              <p className="design-122">마음을 편하게 적어 주세요.</p>
-              <p className="design-123">경험을 나누면 다른 보호자에게 큰 힘이 돼요.</p>
-            </div>
+            <textarea className="design-input" aria-label="내용" placeholder={"마음을 편하게 적어 주세요.\n경험을 나누면 다른 보호자에게 큰 힘이 돼요."} maxLength={5000} disabled={!community.form || community.busy}
+              value={community.form?.content || ""} onChange={event => community.setField("content", event.target.value)} />
             <div className="design-124" data-node-id="47:1455" data-name="말로 쓰기">
               <div className="design-25" data-node-id="47:1456" data-name="icon/mic">
                 <div className="design-125" data-node-id="47:1457" data-name="Group">
@@ -107,9 +102,7 @@ export default function Component101() {
                   </div>
                 </div>
               </div>
-              <p className="design-55" data-node-id="47:1461">
-                말로 쓰기
-              </p>
+              <p className="design-55" data-node-id="47:1461">{community.listening ? "듣는 중…" : "말로 쓰기"}</p>
             </div>
           </div>
         </div>
@@ -122,16 +115,15 @@ export default function Component101() {
             </div>
           </div>
           <div className="design-128" data-node-id="71:1571" data-name="t">
-            <p className="design-129" data-node-id="71:1572">
-              부끄러운 햄스터
-            </p>
+            <p className="design-129" data-node-id="71:1572">{community.session?.nickname || "닉네임 확인 중…"}</p>
             <p className="design-130" data-node-id="71:1573">
               익명 닉네임으로 올라가요
             </p>
           </div>
         </div>
+        {community.formError && <p className="design-56" role="alert">{community.formError}</p>}
         <div className="design-44" data-node-id="16:1192" data-name="spacer" />
-        <Button className="design-45" label="글 올리기" />
+        <Button className="design-45" label={community.busy ? "저장 중…" : community.editId ? "수정 완료" : "글 올리기"} disabled={community.busy || !community.form || !!community.formError} onClick={community.save} />
       </div>
     </div>;
 }

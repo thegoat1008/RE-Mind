@@ -17,3 +17,8 @@ frontend/dist/
 
 # Logs
 *.log
+backend/data/
+.gradle-user/
+.pnpm-store/
+verification/
+.community-processes.json

@@ -2,6 +2,9 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
 import { h, Fragment } from "../designRuntime.jsx";
+import { useCommunityData, timeAgo } from "../community/useCommunity.js";
+import { Message, PostActions, PostState, ListTools } from "../community/Bindings.jsx";
+
 
 const imgStatusDarkBackgroundMask = `/assets/figma/c9227.svg`;
 const imgNetworkSignalDark = `/assets/figma/4c652.svg`;
@@ -14,6 +17,8 @@ const imgIconHeart = `/assets/figma/9e73a.svg`;
 const imgGroup = `/assets/figma/8b408.svg`;
 const imgGroup1 = `/assets/figma/06339.svg`;
 export default function Component104() {
+  const community = useCommunityData();
+  const post = community.post;
   return <div className="design-5" data-node-id="71:1575" data-name="10-4 글 상세 · 공감 모드">
       <div className="design-6" data-node-id="71:1576" data-name="Status Bar">
         <div className="design-7" data-node-id="I71:1576;486:2224" data-name="Status">
@@ -59,6 +64,7 @@ export default function Component104() {
           </p>
         </div>
         <div className="design-96" data-node-id="71:1593" data-name="Scroll">
+          {!post ? <PostState /> : <>
           <div className="design-97" data-node-id="71:1594" data-name="게시글">
             <div className="design-98" data-node-id="71:1595" data-name="meta">
               <div className="design-99" data-node-id="71:1596" data-name="tag">
@@ -66,27 +72,16 @@ export default function Component104() {
                   공감 모드
                 </p>
               </div>
-              <p className="design-100" data-node-id="71:1598">
-                외향적인 고릴라
-              </p>
-              <p className="design-101" data-node-id="71:1599">
-                30분 전
-              </p>
+              <p className="design-100" data-node-id="71:1598">{post.nickname}</p>
+              <p className="design-101" data-node-id="71:1599">{timeAgo(post.createdAt)}</p>
             </div>
-            <div className="design-102" data-node-id="71:1600">
-              <p className="design-103">요즘은 아무것도</p>
-              <p className="design-104">하기 싫어요</p>
-            </div>
-            <p className="design-105" data-node-id="71:1601">
-              밥도 대충 먹고, 잠도 잘 못 자요. 누가 알아주지 않아도 괜찮은데, 오늘은 그냥 말하고 싶었어요.
-            </p>
+            <div className="design-102" data-node-id="71:1600" data-live-text="true"><p className="design-103">{post.title}</p></div>
+            <p className="design-105" data-node-id="71:1601" data-live-text="true">{post.content}</p>
             <div className="design-20" data-node-id="71:1602" data-name="반응">
-              <div className="design-60" data-node-id="71:1603" data-name="icon/heart">
+              <div className="design-60" data-node-id="71:1603" data-name="icon/heart" aria-label="공감 하트" aria-pressed={!!post.liked} disabled={community.busy} onClick={community.like}>
                 <img alt="" className="design-9" src={imgIconHeart} />
               </div>
-              <p className="design-80" data-node-id="71:1605">
-                24
-              </p>
+              <p className="design-80" data-node-id="71:1605">{post.likeCount}</p>
               <div className="design-106" data-node-id="71:1606" data-name="gap" />
               <div className="design-25" data-node-id="72:1543" data-name="icon/eye">
                 <div className="design-436" data-node-id="72:1544" data-name="Group">
@@ -95,11 +90,10 @@ export default function Component104() {
                   </div>
                 </div>
               </div>
-              <p className="design-80" data-node-id="71:1609">
-                조회 128
-              </p>
+              <p className="design-80" data-node-id="71:1609">조회 {post.viewCount}</p>
             </div>
           </div>
+          <PostActions />
           <div className="design-67" data-node-id="71:1658" data-name="공감 모드 안내">
             <div className="design-25" data-node-id="71:1659" data-name="icon/heart">
               <div className="design-421" data-node-id="71:1660" data-name="Group">
@@ -112,11 +106,10 @@ export default function Component104() {
               공감만 받고 싶은 글이에요. 댓글 없이 하트로 마음을 전해 주세요.
             </p>
           </div>
+          </>}
         </div>
-        <div className="design-356" data-node-id="71:1663" data-name="Button (앱 화면)">
-          <p className="design-3" data-node-id="I71:1663;24:968">
-            공감 보내기
-          </p>
+        <div className="design-356" data-node-id="71:1663" data-name="Button (앱 화면)" aria-pressed={!!post?.liked} disabled={!post || community.busy} onClick={community.like}>
+          <p className="design-3" data-node-id="I71:1663;24:968">{post?.liked ? "공감 취소" : "공감 보내기"}</p>
         </div>
       </div>
     </div>;
