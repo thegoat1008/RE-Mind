@@ -57,7 +57,7 @@ public class CommunityService {
         String search = query == null ? "" : query.strip();
         if (search.length() > 100) throw bad("검색어는 100자 이내로 입력해 주세요.");
         PostMode filter = mode == null || mode.equals("ALL") ? null : parseMode(mode);
-        if (!Set.of("LATEST", "POPULAR").contains(order)) throw bad("정렬 기준을 확인해 주세요.");
+        if (!Set.of("LATEST", "POPULAR", "RECOMMENDED").contains(order)) throw bad("정렬 기준을 확인해 주세요.");
         Specification<CommunityPost> spec = (root, criteria, cb) -> {
             var predicates = new ArrayList<jakarta.persistence.criteria.Predicate>();
             if (filter != null) predicates.add(cb.equal(root.get("mode"), filter));
@@ -70,9 +70,11 @@ public class CommunityService {
             }
             return cb.and(predicates.toArray(jakarta.persistence.criteria.Predicate[]::new));
         };
-        Sort sort = order.equals("POPULAR")
-                ? Sort.by(Sort.Order.desc("likeCount"), Sort.Order.desc("createdAt"), Sort.Order.desc("id"))
-                : Sort.by(Sort.Order.desc("createdAt"), Sort.Order.desc("id"));
+        Sort sort = switch (order) {
+            case "POPULAR" -> Sort.by(Sort.Order.desc("likeCount"), Sort.Order.desc("createdAt"), Sort.Order.desc("id"));
+            case "RECOMMENDED" -> Sort.by(Sort.Order.desc("commentCount"), Sort.Order.desc("likeCount"), Sort.Order.desc("createdAt"), Sort.Order.desc("id"));
+            default -> Sort.by(Sort.Order.desc("createdAt"), Sort.Order.desc("id"));
+        };
         var result = posts.findAll(spec, PageRequest.of(page, size, sort));
         Set<Long> liked = new HashSet<>();
         if (viewer != null && !result.isEmpty()) {
@@ -146,7 +148,6 @@ public class CommunityService {
     public CommentView addComment(String authorization, Long id, AddComment request) {
         CommunityMember author = member(authorization, true);
         CommunityPost post = findPost(id, true);
-        if (post.mode == PostMode.EMPATHY) throw new ResponseStatusException(HttpStatus.CONFLICT, "공감 글에는 댓글 대신 하트로 마음을 전해 주세요.");
         if (request == null) throw bad("댓글을 입력해 주세요.");
         CommunityComment comment = comments.save(new CommunityComment(post, author, text(request.content(), "댓글", 1000)));
         post.commentCount++;

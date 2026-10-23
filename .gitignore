@@ -10,6 +10,7 @@ backend/certs/*
 # Java / Gradle
 backend/.gradle/
 backend/build/
+backend/bin/
 
 # Node / Vite
 frontend/node_modules/

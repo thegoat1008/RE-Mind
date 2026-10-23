@@ -76,11 +76,16 @@ class CommunityIntegrationTest {
         assertEquals(404, call("GET", path + "/comments", visitor, null).status);
     }
 
-    @Test void empathyPostsRejectCommentsOnTheServer() {
-        String token = session();
+    @Test void empathyPostsAcceptCommentsWithTheSameOwnershipRules() {
+        String token = session(), visitor = session();
         long id = post(token, "EMPATHY", "마음을 나눠요 " + unique());
-        Reply reply = call("POST", "/posts/" + id + "/comments", token, Map.of("content", "댓글 시도"));
-        assertEquals(409, reply.status);
+        Reply reply = call("POST", "/posts/" + id + "/comments", visitor, Map.of("content", "그 마음 이해해요."));
+        assertEquals(201, reply.status, reply.body);
+        assertEquals(1, number(call("GET", "/posts/" + id, token, null), "commentCount"));
+        assertEquals(1, number(call("GET", "/posts/" + id + "/comments", token, null), "totalElements"));
+        long commentId = number(reply, "id");
+        assertEquals(403, call("DELETE", "/posts/" + id + "/comments/" + commentId, token, null).status);
+        assertEquals(204, call("DELETE", "/posts/" + id + "/comments/" + commentId, visitor, null).status);
         assertEquals(0, number(call("GET", "/posts/" + id, token, null), "commentCount"));
         assertEquals(1, number(call("PUT", "/posts/" + id + "/like", token, null), "likeCount"));
     }
@@ -104,7 +109,7 @@ class CommunityIntegrationTest {
     @Test void searchFiltersPaginationAndPopularityUseStoredData() {
         String owner = session(), visitor = session(), term = unique();
         long first = post(owner, "SOLUTION", term + " 첫 글");
-        post(owner, "EMPATHY", term + " 둘째 글");
+        long second = post(owner, "EMPATHY", term + " 둘째 글");
         post(visitor, "SOLUTION", term + " 셋째 글");
         call("PUT", "/posts/" + first + "/like", visitor, null);
         Reply list = call("GET", "/posts?q=" + term + "&size=1&sort=POPULAR", owner, null);
@@ -112,6 +117,10 @@ class CommunityIntegrationTest {
         assertEquals(first, number(list, "id"));
         assertEquals(3, number(list, "totalElements"));
         assertTrue(list.body.contains("\"hasNext\":true"));
+        call("POST", "/posts/" + second + "/comments", visitor, Map.of("content", "함께 이야기해요."));
+        Reply recommended = call("GET", "/posts?q=" + term + "&sort=RECOMMENDED", owner, null);
+        assertEquals(200, recommended.status, recommended.body);
+        assertEquals(second, number(recommended, "id"));
         assertEquals(2, number(call("GET", "/posts?q=" + term + "&mode=SOLUTION", owner, null), "totalElements"));
         assertEquals(2, number(call("GET", "/posts?q=" + term + "&mine=true", owner, null), "totalElements"));
         assertEquals(401, call("GET", "/posts?mine=true", null, null).status);

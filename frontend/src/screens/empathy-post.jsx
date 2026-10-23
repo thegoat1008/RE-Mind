@@ -1,50 +1,51 @@
 /** @jsxRuntime classic */
 /** @jsx h */
 /** @jsxFrag Fragment */
-import { h, Fragment } from "../designRuntime.jsx";
-import { useCommunityData, timeAgo } from "../community/useCommunity.js";
-import { Message, PostActions, PostState, ListTools } from "../community/Bindings.jsx";
+import { h, Fragment } from '../designRuntime.jsx'
+import { useCommunityData, timeAgo } from '../community/useCommunity.js'
+import { PostActions, PostState, CommentThread } from '../community/Bindings.jsx'
 
-
-const imgStatusDarkBackgroundMask = `/assets/figma/c9227.svg`;
-const imgNetworkSignalDark = `/assets/figma/4c652.svg`;
-const imgWiFiSignalDark = `/assets/figma/f883c.svg`;
-const imgBatteryDark = `/assets/figma/9efe4.svg`;
-const imgTimeDarkBackgroundMask = `/assets/figma/f965f.svg`;
-const img941 = `/assets/figma/a1382.svg`;
-const imgIconChevL = `/assets/figma/fa782.svg`;
-const imgIconHeart = `/assets/figma/9e73a.svg`;
-const imgGroup = `/assets/figma/8b408.svg`;
-const imgGroup1 = `/assets/figma/06339.svg`;
+const imgStatusDarkBackgroundMask = `/assets/figma-v2/c9227.svg`;
+const imgNetworkSignalDark = `/assets/figma-v2/4c652.svg`;
+const imgWiFiSignalDark = `/assets/figma-v2/f883c.svg`;
+const imgBatteryDark = `/assets/figma-v2/9efe4.svg`;
+const imgTimeDarkBackgroundMask = `/assets/figma-v2/f965f.svg`;
+const img941 = `/assets/figma-v2/a1382.svg`;
+const imgIconChevL = `/assets/figma-v2/905bb.svg`;
+const imgIconMic = `/assets/figma-v2/876c8.svg`;
+const imgIconSend = `/assets/figma-v2/7e014.svg`;
+const imgIconHeart = `/assets/figma-v2/03bff.svg`;
+const imgIconMsg = `/assets/figma-v2/38131.svg`;
+const imgGroup = `/assets/figma-v2/ba737.svg`;
 export default function Component104() {
   const community = useCommunityData();
   const post = community.post;
-  return <div className="design-5" data-node-id="71:1575" data-name="10-4 글 상세 · 공감 모드">
-      <div className="design-6" data-node-id="71:1576" data-name="Status Bar">
-        <div className="design-7" data-node-id="I71:1576;486:2224" data-name="Status">
-          <div className="design-7" data-node-id="I71:1576;486:2225" data-name="status/dark">
-            <div className="design-8" data-node-id="I71:1576;486:2226" data-name="status/dark (Background/Mask)">
-              <img alt="" className="design-9" src={imgStatusDarkBackgroundMask} />
+  return <div className="design-1" data-node-id="179:8037" data-name="10-4 글 상세 · 공감 모드">
+      <div className="design-2" data-node-id="179:8038" data-name="Status Bar">
+        <div className="design-3" data-node-id="I179:8038;486:2224" data-name="Status">
+          <div className="design-3" data-node-id="I179:8038;486:2225" data-name="status/dark">
+            <div className="design-4" data-node-id="I179:8038;486:2226" data-name="status/dark (Background/Mask)">
+              <img alt="" className="design-5" src={imgStatusDarkBackgroundMask} />
             </div>
-            <div className="design-10" data-node-id="I71:1576;486:2227" data-name="status/dark">
-              <div className="design-11" data-node-id="I71:1576;486:2228" data-name="Status Icons">
-                <div className="design-12" data-node-id="I71:1576;486:2229" data-name="Network Signal / Dark">
-                  <img alt="" className="design-9" src={imgNetworkSignalDark} />
+            <div className="design-6" data-node-id="I179:8038;486:2227" data-name="status/dark">
+              <div className="design-7" data-node-id="I179:8038;486:2228" data-name="Status Icons">
+                <div className="design-8" data-node-id="I179:8038;486:2229" data-name="Network Signal / Dark">
+                  <img alt="" className="design-5" src={imgNetworkSignalDark} />
                 </div>
-                <div className="design-13" data-node-id="I71:1576;486:2238" data-name="WiFi Signal / Dark">
-                  <img alt="" className="design-9" src={imgWiFiSignalDark} />
+                <div className="design-9" data-node-id="I179:8038;486:2238" data-name="WiFi Signal / Dark">
+                  <img alt="" className="design-5" src={imgWiFiSignalDark} />
                 </div>
-                <div className="design-14" data-node-id="I71:1576;486:2243" data-name="Battery / Dark">
-                  <img alt="" className="design-9" src={imgBatteryDark} />
+                <div className="design-10" data-node-id="I179:8038;486:2243" data-name="Battery / Dark">
+                  <img alt="" className="design-5" src={imgBatteryDark} />
                 </div>
               </div>
-              <div className="design-15" data-node-id="I71:1576;486:2249" data-name="Time / Dark">
-                <div className="design-16" data-node-id="I71:1576;486:2250" data-name="Time / Dark (Background/Mask)">
-                  <img alt="" className="design-9" src={imgTimeDarkBackgroundMask} />
+              <div className="design-11" data-node-id="I179:8038;486:2249" data-name="Time / Dark">
+                <div className="design-12" data-node-id="I179:8038;486:2250" data-name="Time / Dark (Background/Mask)">
+                  <img alt="" className="design-5" src={imgTimeDarkBackgroundMask} />
                 </div>
-                <div className="design-17" data-node-id="I71:1576;486:2251" data-name="Time / Dark">
-                  <div className="design-18" data-node-id="I71:1576;486:2252" data-name="9:41">
-                    <img alt="" className="design-9" src={img941} />
+                <div className="design-13" data-node-id="I179:8038;486:2251" data-name="Time / Dark">
+                  <div className="design-14" data-node-id="I179:8038;486:2252" data-name="9:41">
+                    <img alt="" className="design-5" src={img941} />
                   </div>
                 </div>
               </div>
@@ -52,64 +53,80 @@ export default function Component104() {
           </div>
         </div>
       </div>
-      <div className="design-90" data-node-id="71:1577" data-name="Content">
-        <div className="design-20" data-node-id="71:1578" data-name="Header">
-          <a className="design-21" data-node-id="71:1579" data-name="뒤로 버튼">
-            <div className="design-22" data-node-id="71:1580" data-name="icon/chevL">
-              <img alt="" className="design-9" src={imgIconChevL} />
+      <div className="design-88" data-node-id="179:8039" data-name="Content">
+        <div className="design-16" data-node-id="179:8040" data-name="Header">
+          <a className="design-17" data-node-id="179:8041" data-name="뒤로 버튼">
+            <div className="design-18" data-node-id="179:8042" data-name="icon/chevL">
+              <img alt="" className="design-5" src={imgIconChevL} />
             </div>
           </a>
-          <p className="design-23" data-node-id="71:1582">
+          <p className="design-19" data-node-id="179:8044">
             커뮤니티
           </p>
         </div>
-        <div className="design-96" data-node-id="71:1593" data-name="Scroll">
+        {post && <div className="design-89" data-node-id="179:8045" data-name="입력창">
+          <div className="design-90" data-node-id="179:8046" data-name="input">
+            <input className="design-91 design-input" aria-label="댓글" placeholder="공감의 말을 남겨 주세요" maxLength={1000} disabled={community.busy}
+              value={community.comment} onChange={event => community.setComment(event.target.value)}
+              onKeyDown={event => { if (event.key === "Enter" && !event.nativeEvent.isComposing) community.addComment(); }} />
+            <div className="design-92" data-node-id="179:8048" data-name="icon/mic">
+              <img alt="" className="design-5" src={imgIconMic} />
+            </div>
+          </div>
+          <div className="design-93" data-node-id="179:8051" data-name="보내기" aria-label="댓글 보내기" disabled={community.busy} onClick={community.addComment}>
+            <div className="design-92" data-node-id="179:8052" data-name="icon/send">
+              <img alt="" className="design-5" src={imgIconSend} />
+            </div>
+          </div>
+        </div>}
+        <div className="design-94" data-node-id="179:8055" data-name="Scroll">
           {!post ? <PostState /> : <>
-          <div className="design-97" data-node-id="71:1594" data-name="게시글">
-            <div className="design-98" data-node-id="71:1595" data-name="meta">
-              <div className="design-99" data-node-id="71:1596" data-name="tag">
-                <p className="design-55" data-node-id="71:1597">
+          <div className="design-95" data-node-id="179:8056" data-name="게시글">
+            <div className="design-96" data-node-id="179:8057" data-name="meta">
+              <div className="design-97" data-node-id="179:8058" data-name="tag">
+                <p className="design-56" data-node-id="179:8059">
                   공감 모드
                 </p>
               </div>
-              <p className="design-100" data-node-id="71:1598">{post.nickname}</p>
-              <p className="design-101" data-node-id="71:1599">{timeAgo(post.createdAt)}</p>
+              <div className="design-98" data-node-id="179:8060" data-name="spacer" />
+              <p className="design-99" data-node-id="179:8061">{timeAgo(post.createdAt)}</p>
             </div>
-            <div className="design-102" data-node-id="71:1600" data-live-text="true"><p className="design-103">{post.title}</p></div>
-            <p className="design-105" data-node-id="71:1601" data-live-text="true">{post.content}</p>
-            <div className="design-20" data-node-id="71:1602" data-name="반응">
-              <div className="design-60" data-node-id="71:1603" data-name="icon/heart" aria-label="공감 하트" aria-pressed={!!post.liked} disabled={community.busy} onClick={community.like}>
-                <img alt="" className="design-9" src={imgIconHeart} />
+            <div className="design-100" data-node-id="179:8062" data-live-text="true"><p className="design-101">{post.title}</p></div>
+            <p className="design-103" data-node-id="179:8063" data-live-text="true">{post.content}</p>
+            <div className="design-16" data-node-id="179:8064" data-name="반응">
+              <div className="design-61" data-node-id="179:8065" data-name="icon/heart" aria-label="공감 하트" aria-pressed={!!post.liked} disabled={community.busy} onClick={community.like}>
+                <img alt="" className="design-5" src={imgIconHeart} />
               </div>
-              <p className="design-80" data-node-id="71:1605">{post.likeCount}</p>
-              <div className="design-106" data-node-id="71:1606" data-name="gap" />
-              <div className="design-25" data-node-id="72:1543" data-name="icon/eye">
-                <div className="design-436" data-node-id="72:1544" data-name="Group">
-                  <div className="design-437">
-                    <img alt="" className="design-28" src={imgGroup} />
-                  </div>
+              <p className="design-21" data-node-id="179:8067">{post.likeCount}</p>
+              <div className="design-104" data-node-id="179:8068" data-name="gap" />
+              <div className="design-61" data-node-id="179:8069" data-name="icon/msg">
+                <img alt="" className="design-5" src={imgIconMsg} />
+              </div>
+              <p className="design-21" data-node-id="179:8071">{post.commentCount}</p>
+              <div className="design-98" data-node-id="179:8072" data-name="spacer" />
+              <p className="design-21" data-node-id="179:8073">{post.nickname}</p>
+            </div>
+          </div>
+          <div className="design-66" data-node-id="179:8074" data-name="공감 모드 안내">
+            <div className="design-67" data-node-id="179:8075" data-name="icon/heart">
+              <div className="design-427" data-node-id="179:8076" data-name="Group">
+                <div className="design-428">
+                  <img alt="" className="design-28" src={imgGroup} />
                 </div>
               </div>
-              <p className="design-80" data-node-id="71:1609">조회 {post.viewCount}</p>
+            </div>
+            <div className="design-290" data-node-id="179:8078">
+              <p className="design-115">공감만 받고 싶은 글이에요.</p>
+              <p className="design-115">조언보다 따뜻한</p>
+              <p className="design-116">공감의 말을 남겨 주세요.</p>
             </div>
           </div>
           <PostActions />
-          <div className="design-67" data-node-id="71:1658" data-name="공감 모드 안내">
-            <div className="design-25" data-node-id="71:1659" data-name="icon/heart">
-              <div className="design-421" data-node-id="71:1660" data-name="Group">
-                <div className="design-438">
-                  <img alt="" className="design-28" src={imgGroup1} />
-                </div>
-              </div>
-            </div>
-            <p className="design-288" data-node-id="71:1662">
-              공감만 받고 싶은 글이에요. 댓글 없이 하트로 마음을 전해 주세요.
-            </p>
+          <p className="design-35" data-node-id="179:8079">댓글 {post.commentCount}</p>
+          <div className="design-105" data-node-id="179:8080" data-name="댓글 목록">
+            <CommentThread />
           </div>
           </>}
-        </div>
-        <div className="design-356" data-node-id="71:1663" data-name="Button (앱 화면)" aria-pressed={!!post?.liked} disabled={!post || community.busy} onClick={community.like}>
-          <p className="design-3" data-node-id="I71:1663;24:968">{post?.liked ? "공감 취소" : "공감 보내기"}</p>
         </div>
       </div>
     </div>;

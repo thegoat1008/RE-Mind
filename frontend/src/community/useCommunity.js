@@ -90,12 +90,10 @@ export function useCommunity({ screen, route, notify }) {
       const correctScreen = value.mode === 'EMPATHY' ? 'empathy-post' : 'post'
       if (screen !== correctScreen) { go(`${correctScreen}?id=${id}`); return }
       setPost(value)
-      if (value.mode === 'SOLUTION') {
-        try {
-          const result = await api.comments(id, 0, controller.signal)
-          if (!controller.signal.aborted) setComments(result)
-        } catch (error) { if (error.name !== 'AbortError') setCommentError(error.message) }
-      }
+      try {
+        const result = await api.comments(id, 0, controller.signal)
+        if (!controller.signal.aborted) setComments(result)
+      } catch (error) { if (error.name !== 'AbortError') setCommentError(error.message) }
     }).catch(error => { if (error.name !== 'AbortError') setPostError(error.message) })
     return () => controller.abort()
   }, [screen, id, revision])
@@ -157,7 +155,7 @@ export function useCommunity({ screen, route, notify }) {
     perform(async () => { await api.remove(post.id); go('community') })
   }
   function addComment() {
-    if (!post || post.mode !== 'SOLUTION') return
+    if (!post) return
     if (!comment.trim()) { notify('댓글을 입력해 주세요.'); return }
     const originalRoute = route
     perform(async () => {
@@ -213,6 +211,6 @@ export function useCommunity({ screen, route, notify }) {
     own: value => { setMine(value); setPage(0) }, setPage,
     post, postError, comments, commentError, comment, setComment, openPost, like, removePost,
     edit: () => go(`write-post?edit=${post.id}`), addComment, removeComment, moreComments,
-    back: () => { if (editId && post) openPost(post); else go('community') }, go,
+    back: () => { if (editId && post) openPost(post); else go(screen === 'write-post' ? 'write-mode' : 'community') }, go,
   }
 }
