@@ -16,7 +16,7 @@
 
 html, body, #root { margin: 0; min-width: 402px; min-height: 100%; }
 html { background: #000; }
-body { font-family: 'Noto Sans KR', sans-serif; font-size: 16px; line-height: 1.5; color: #222927; }
+body { font-family: 'Noto Sans KR', sans-serif; font-size: 16px; line-height: 1.5; color: #1a4710; }
 p, h1, h2, h3, h4, figure { margin: 0; }
 a { color: inherit; text-decoration: inherit; }
 img, svg { display: block; vertical-align: middle; }
@@ -47,7 +47,7 @@ button { background: transparent; }
 .app-viewport [data-name='Scroll'] { scrollbar-width: none; }
 .app-viewport [data-name='Scroll']::-webkit-scrollbar { display: none; }
 [data-interactive='true'] { cursor: pointer; }
-[data-interactive='true']:focus-visible, .design-input:focus-visible { outline: 2px solid #2f7d6d; outline-offset: 3px; }
+[data-interactive='true']:focus-visible, .design-input:focus-visible { outline: 2px solid #4ba637; outline-offset: 3px; }
 [data-name='toggle'][data-toggled='false'] { background: #e1e6e4; border-radius: 18px; }
 [data-name='toggle'][data-toggled='false'] > * { visibility: hidden; }
 [data-name='toggle'][data-toggled='false']::after {
@@ -60,9 +60,9 @@ button { background: transparent; }
   border-radius: 50%;
   background: #fff;
 }
-[aria-pressed='true'] { background: #2f7d6d; }
+[aria-pressed='true'] { background: #4ba637; }
 [aria-pressed='true'] p { color: #fff; }
-[aria-pressed='true'] { border-color: #2f7d6d; }
+[aria-pressed='true'] { border-color: #4ba637; }
 [aria-pressed='false'] { background: #fff; box-shadow: inset 0 0 0 1.5px #e1e6e4; }
 [aria-pressed='false'] p { color: #65706c; }
 
@@ -78,7 +78,7 @@ button { background: transparent; }
   outline: none;
 }
 .design-input::placeholder { color: inherit; opacity: 1; }
-textarea.design-input { height: 100%; }
+textarea.design-input { height: 100%; line-height: 29px; font-size: 20px; white-space: pre-wrap; }
 .original-text-line { display: block; white-space: nowrap; }
 .verification-input {
   position: absolute;
@@ -92,7 +92,7 @@ textarea.design-input { height: 100%; }
   text-align: center;
   outline: none;
 }
-.verification-input::placeholder { color: #222927; opacity: 1; }
+.verification-input::placeholder { color: #1a4710; opacity: 1; }
 
 .app-toast {
   position: absolute;
@@ -102,7 +102,7 @@ textarea.design-input { height: 100%; }
   width: 362px;
   padding: 14px 18px;
   border-radius: 16px;
-  background: #222927;
+  background: #1a4710;
   color: #fff;
   font-size: 16px;
   line-height: 24px;
@@ -111,3 +111,17 @@ textarea.design-input { height: 100%; }
 @media (max-height: 873px) {
   .desktop-stage { align-items: flex-start; }
 }
+
+/* Completion controls reuse the original checked and unchecked Figma SVGs. */
+[data-name='Frame']:has(> [data-name='check'][data-toggled='true']) { background: #4ba637; border-color: #4ba637; }
+[data-name='Frame']:has(> [data-name='check'][data-toggled='false']) { background: #fff; border: 1px solid #d8ddda; }
+
+.like-button[aria-pressed] { background: transparent; border: 0; box-shadow: none; cursor: pointer; }
+.like-button[data-liked='true'] img { filter: brightness(0) saturate(100%) invert(42%) sepia(87%) saturate(1381%) hue-rotate(328deg) brightness(96%) contrast(94%); }
+.home-event-list { display: flex; flex-direction: column; gap: 16px; max-height: 296px; width: 100%; overflow-y: auto; scrollbar-width: none; }
+.calendar-event-list { display: flex; flex-direction: column; gap: 12px; width: 100%; }
+.dynamic-event-list { height: auto; min-height: 0; overflow: visible; }
+.empty-events { padding: 24px 0; color: #65706c; }
+.event-title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+[data-choice='date'][aria-pressed='false'] { background: transparent; box-shadow: none; border: 0; }
+[data-choice='date'][aria-pressed='false'] p { color: #1a4710; }
