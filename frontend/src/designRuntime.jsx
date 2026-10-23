@@ -11,28 +11,6 @@ const seedCards = {
   '196:5669': 'morning', '196:5680': 'hospital',
 }
 const seedIds = new Set(['morning', 'hospital', 'family'])
-const likeNodes = {
-  '179:6329': ['night', 24], '179:6346': ['tired', 41], '179:6363': ['policy', 63],
-  '179:6239': ['night', 24], '179:8065': ['tired', 41],
-}
-const likeCounts = {
-  '179:6331': ['night', 24], '179:6348': ['tired', 41], '179:6365': ['policy', 63],
-  '179:6241': ['night', 24], '179:8067': ['tired', 41],
-}
-function LikeButton({ postId, children, ...props }) {
-  const app = useContext(DesignContext)
-  const liked = Boolean(app.likes[postId])
-  return <button {...props} type="button" className={`${props.className} like-button`}
-    aria-label="좋아요" aria-pressed={liked} data-liked={liked} data-interactive="true"
-    onKeyDown={(event) => event.stopPropagation()}
-    onClick={(event) => { event.stopPropagation(); app.toggleLike(postId) }}>
-    {children}
-  </button>
-}
-function LikeCount({ postId, count, ...props }) {
-  const app = useContext(DesignContext)
-  return <p {...props}>{count + (app.likes[postId] ? 1 : 0)}</p>
-}
 function EventCard({ eventId, children, ...props }) {
   const app = useContext(DesignContext)
   const event = app.eventsForDate.find((item) => item.id === eventId)
@@ -231,8 +209,21 @@ export function h(type, props, ...children) {
   if (typeof type !== 'string') return React.createElement(type, props, ...children)
   const name = props?.['data-name'] || ''
   const nodeId = props?.['data-node-id'] || ''
-  if (likeNodes[nodeId]) return React.createElement(LikeButton, { ...props, postId: likeNodes[nodeId][0] }, ...children)
-  if (likeCounts[nodeId]) return React.createElement(LikeCount, { ...props, postId: likeCounts[nodeId][0], count: likeCounts[nodeId][1] })
+  if (typeof props?.onClick === 'function') {
+    const Tag = type === 'a' ? 'div' : type
+    const native = ['button', 'input', 'select', 'textarea'].includes(Tag)
+    const activate = event => {
+      event.stopPropagation()
+      if (!props.disabled) props.onClick(event)
+    }
+    return React.createElement(Tag, { ...props, onClick: activate,
+      ...(!native ? { role: 'button', tabIndex: props.disabled ? -1 : 0,
+        'aria-disabled': props.disabled || undefined,
+        onKeyDown: event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); activate(event) } },
+      } : {}),
+    }, ...children)
+  }
+  if (name === '게시글' && ['179:6230', '179:8056'].includes(nodeId)) return React.createElement(type, props, ...children)
   if (seedCards[nodeId]) return React.createElement(EventCard, { ...props, eventId: seedCards[nodeId] }, ...children)
   if (type === 'p' && props?.className === 'design-213') return React.createElement(EventText, props, ...children)
   if (type === 'p' && props?.className === 'design-212') return React.createElement(EventText, { ...props, title: true }, ...children)
