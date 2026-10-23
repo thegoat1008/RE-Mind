@@ -40,6 +40,8 @@ export default function App() {
   const [route, setRoute] = useState(() => window.location.hash)
   const screen = currentScreen(route)
   const [fields, setFields] = useState({})
+  const [verificationCode, setVerificationCodeState] = useState(['', '', '', ''])
+  const [datePickerOpen, setDatePickerOpen] = useState(false)
   const [selections, setSelections] = useState({})
   const [toast, setToast] = useState('')
   const [notificationsRead, setNotificationsRead] = useState(false)
@@ -77,12 +79,37 @@ export default function App() {
     setSelectedDate(date)
     setCalendarMonth(date.slice(0, 7))
   }
+  function setVerificationCode(index, text) {
+    const rawDigits = text.replace(/\D/g, '')
+    const digits = rawDigits.length >= 4 ? rawDigits.slice(0, 4) : rawDigits.slice(0, 4 - index)
+    setVerificationCodeState((current) => {
+      if (rawDigits.length >= 4) return digits.split('')
+      const next = [...current]
+      if (digits.length > 1) {
+        digits.split('').forEach((digit, offset) => { next[index + offset] = digit })
+      } else if (digits.length === 1) next[index] = digits
+      else next[index] = ''
+      return next
+    })
+    const focusIndex = rawDigits.length >= 4 ? 3 : Math.min(index + Math.max(digits.length, 1), 3)
+    requestAnimationFrame(() => document.querySelectorAll('.verification-input')[focusIndex]?.focus())
+  }
+  function openDatePicker() {
+    const current = parseDate(fields['add-event:179:6426'], selectedDate) || selectedDate
+    setCalendarMonth(current.slice(0, 7))
+    setDatePickerOpen(true)
+  }
+  function chooseEventDate(date) {
+    setFields((current) => ({ ...current, 'add-event:179:6426': formatDate(date) }))
+    selectDate(date)
+    setDatePickerOpen(false)
+  }
   function startEvent(event = null) {
     setEditingEventId(event?.id || null)
     setFields((current) => ({ ...current,
       'add-event:179:6421': event?.title || '',
-      'add-event:179:6426': formatDate(selectedDate),
-      'add-event:179:6433': formatTime(event?.time || '19:00'),
+      'add-event:179:6426': event ? formatDate(event.date) : '',
+      'add-event:179:6433': event ? formatTime(event.time) : '',
     }))
     setSelections((current) => ({ ...current, 'add-event:Chip (앱 화면)': `add-event:179:${{ '안 함': 6441, '매일': 6442, '매주': 6443, '매월': 6444 }[event?.repeat || '매일']}:${event?.repeat || '매일'}` }))
     go('add-event')
@@ -125,6 +152,7 @@ export default function App() {
       return
     }
     if (name === '뒤로 버튼') return go(parents[screen] || 'home')
+    if (name === 'icon/cal') return openDatePicker()
     if (name === 'calendar-day') return selectDate(`${calendarMonth}-${String(Number(label)).padStart(2, '0')}`)
     if (['보기 버튼', 'toggle', 'check', '개인정보 동의'].includes(name)) return
     if (['calendar', 'family-calendar'].includes(screen) && label === '오늘') return selectDate(localDate())
@@ -213,7 +241,7 @@ export default function App() {
   }
 
   const context = {
-    screen, fields, selections, activate, notificationsRead,
+    screen, fields, selections, activate, notificationsRead, verificationCode, setVerificationCode,
     events, selectedDate, calendarMonth, selectDate, setCalendarMonth,
     selectedEvent: events.find((event) => event.id === selectedEventId),
     eventsForDate: events.filter((event) => occursOn(event, selectedDate)),
@@ -231,9 +259,33 @@ export default function App() {
         <div className="app-viewport" data-screen={screen} data-community-live={communityScreens.has(screen)} key={route}>
           <Screen />
           {toast && <div className="app-toast" role="status">{toast}</div>}
+          {datePickerOpen && screen === 'add-event' && <div className="date-picker-backdrop" onClick={() => setDatePickerOpen(false)}>
+            <section className="date-picker" role="dialog" aria-modal="true" aria-label="일정 날짜 선택" onClick={(event) => event.stopPropagation()}>
+              <header className="date-picker-header">
+                <button type="button" aria-label="이전 달" onClick={() => setCalendarMonth(moveMonth(calendarMonth, -1))}>‹</button>
+                <strong>{calendarMonth.replace('-', '년 ')}월</strong>
+                <button type="button" aria-label="다음 달" onClick={() => setCalendarMonth(moveMonth(calendarMonth, 1))}>›</button>
+              </header>
+              <div className="date-picker-grid date-picker-weekdays">{'일월화수목금토'.split('').map((day) => <span key={day}>{day}</span>)}</div>
+              <div className="date-picker-grid">
+                {Array.from({ length: new Date(...calendarMonth.split('-').map(Number).map((value, index) => index === 1 ? value - 1 : value), 1).getDay() }, (_, index) => <span key={`blank-${index}`} />)}
+                {Array.from({ length: new Date(...calendarMonth.split('-').map(Number), 0).getDate() }, (_, index) => {
+                  const date = `${calendarMonth}-${String(index + 1).padStart(2, '0')}`
+                  const active = formatDate(parseDate(fields['add-event:179:6426'], selectedDate) || selectedDate) === formatDate(date)
+                  return <button type="button" key={date} aria-pressed={active} onClick={() => chooseEventDate(date)}>{index + 1}</button>
+                })}
+              </div>
+              <button type="button" className="date-picker-today" onClick={() => chooseEventDate(localDate())}>오늘</button>
+            </section>
+          </div>}
         </div>
       </main>
       </CommunityContext.Provider>
     </DesignContext.Provider>
   )
+}
+
+function moveMonth(value, offset) {
+  const [year, month] = value.split('-').map(Number)
+  return localDate(new Date(year, month - 1 + offset, 1)).slice(0, 7)
 }

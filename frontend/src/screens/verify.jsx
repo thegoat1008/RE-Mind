@@ -64,16 +64,13 @@ export default function Component04() {
         <div className="design-274" data-node-id="179:6920" data-name="온이 안내">
           <Character className="design-266" />
           <div className="design-290" data-node-id="179:6922">
-            <p className="design-115">메일로 보낸 숫자 4자리를</p>
-            <p className="design-116">알려주시면 돼요.</p>
+            <p className="design-115">메일로 보낸</p>
+            <p className="design-116">숫자 4자리를 알려주세요.</p>
           </div>
         </div>
         <div className="design-291" data-node-id="179:6923" data-name="제목">
           <p className="design-292" data-node-id="179:6924">
             인증 코드를 입력해 주세요
-          </p>
-          <p className="design-293" data-node-id="179:6925">
-            jieun.kim@gmail.com
           </p>
         </div>
         <div className="design-177" data-node-id="179:6926" data-name="인증 코드">

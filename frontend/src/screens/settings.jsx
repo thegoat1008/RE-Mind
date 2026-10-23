@@ -15,7 +15,7 @@ const imgGroup = `/assets/figma-v2/daa30.svg`;
 const imgGroup1 = `/assets/figma-v2/492e0.svg`;
 const imgGroup2 = `/assets/figma-v2/9a8d3.svg`;
 const imgGroup3 = `/assets/figma-v2/acaf5.svg`;
-const imgGroup4 = `/assets/figma-v2/90d71.svg`;
+const imgGroup4 = `/assets/figma-v2/8160e.svg`;
 const imgGroup5 = `/assets/figma-v2/0d8b1.svg`;
 function Chip({ className, nodeId, label = "칩", state = "default" }) {
   return <div className={className || "design-48"} data-node-id={nodeId} data-name="Chip (앱 화면)">

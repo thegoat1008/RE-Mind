@@ -66,11 +66,6 @@ export default function Component08() {
           <p className="design-129" data-node-id="179:6457">
             돌봄 캘린더
           </p>
-          <div className="design-189" data-node-id="179:6463" data-name="Chip (앱 화면)">
-            <p className="design-190" data-node-id="I179:6463;24:977">
-              오늘
-            </p>
-          </div>
         </div>
         <div className="design-191" data-node-id="220:5998" data-name="Scroll">
           <div className="design-192" data-node-id="220:5999" data-name="월간 캘린더">

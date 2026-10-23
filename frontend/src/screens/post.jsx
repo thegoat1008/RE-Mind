@@ -14,12 +14,13 @@ const img941 = `/assets/figma-v2/a1382.svg`;
 const imgIconChevL = `/assets/figma-v2/905bb.svg`;
 const imgIconMic = `/assets/figma-v2/876c8.svg`;
 const imgIconSend = `/assets/figma-v2/7e014.svg`;
-const imgIconHeart = `/assets/figma-v2/03bff.svg`;
+const imgIconHeart = `/assets/figma-v2/54f0f.svg`;
+const imgIconHeartOutline = `/assets/figma-v2/03bff.svg`;
 const imgIconMsg = `/assets/figma-v2/38131.svg`;
 export default function Component102() {
   const community = useCommunityData();
   const post = community.post;
-  return <div className="design-1" data-node-id="179:6211" data-name="10-2 글 상세">
+  return <div className="design-1" data-node-id="220:8296" data-name="10-2 글 상세">
       <div className="design-2" data-node-id="179:6212" data-name="Status Bar">
         <div className="design-3" data-node-id="I179:6212;486:2224" data-name="Status">
           <div className="design-3" data-node-id="I179:6212;486:2225" data-name="status/dark">
@@ -84,7 +85,7 @@ export default function Component102() {
             <div className="design-96" data-node-id="179:6231" data-name="meta">
               <div className="design-97" data-node-id="179:6232" data-name="tag">
                 <p className="design-56" data-node-id="179:6233">
-                  해결책 모드
+                  👍 추천
                 </p>
               </div>
               <div className="design-98" data-node-id="179:6234" data-name="spacer" />
@@ -93,10 +94,10 @@ export default function Component102() {
             <div className="design-100" data-node-id="179:6236" data-live-text="true"><p className="design-101">{post.title}</p></div>
             <p className="design-103" data-node-id="179:6237" data-live-text="true">{post.content}</p>
             <div className="design-16" data-node-id="179:6238" data-name="반응">
-              <div className="design-61" data-node-id="179:6239" data-name="icon/heart" aria-label="공감 하트" aria-pressed={!!post.liked} disabled={community.busy} onClick={community.like}>
-                <img alt="" className="design-5" src={imgIconHeart} />
+              <div className="design-61" data-node-id="220:8324" data-name="icon/heart" aria-label="공감 하트" aria-pressed={!!post.liked} disabled={community.busy} onClick={community.like}>
+                <img alt="" className="design-5" src={post.liked ? imgIconHeart : imgIconHeartOutline} />
               </div>
-              <p className="design-21" data-node-id="179:6241">{post.likeCount}</p>
+              <p className="design-21" data-node-id="220:8327">{post.likeCount}</p>
               <div className="design-104" data-node-id="179:6242" data-name="gap" />
               <div className="design-61" data-node-id="179:6243" data-name="icon/msg">
                 <img alt="" className="design-5" src={imgIconMsg} />

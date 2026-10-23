@@ -11,14 +11,13 @@ const imgBatteryDark = `/assets/figma-v2/9efe4.svg`;
 const imgTimeDarkBackgroundMask = `/assets/figma-v2/f965f.svg`;
 const img941 = `/assets/figma-v2/a1382.svg`;
 const imgEllipse = `/assets/figma-v2/e30d9.svg`;
-const imgIconMic = `/assets/figma-v2/876c8.svg`;
+const imgIconMic = `/assets/figma-v2/4bcbe.svg`;
 const imgIconSend = `/assets/figma-v2/7e014.svg`;
 const imgGroup = `/assets/figma-v2/492e0.svg`;
 const imgGroup1 = `/assets/figma-v2/9a8d3.svg`;
 const imgGroup2 = `/assets/figma-v2/e4e9b.svg`;
 const imgGroup3 = `/assets/figma-v2/90d71.svg`;
 const imgGroup4 = `/assets/figma-v2/07ec0.svg`;
-const imgGroup5 = `/assets/figma-v2/e5958.svg`;
 const imgGroup6 = `/assets/figma-v2/f591b.svg`;
 function Chip({ className, nodeId, label = "칩", state = "default" }) {
   return <div className={className || "design-48"} data-node-id={nodeId} data-name="Chip (앱 화면)">
@@ -33,7 +32,7 @@ function Character({ className }) {
     </div>;
 }
 export default function Component091Ai() {
-  return <div className="design-1" data-node-id="179:7201" data-name="09-1 AI 챗팅 · 음성 입력">
+  return <div className="design-1" data-node-id="220:7537" data-name="09 AI 챗팅">
       <div className="design-126" data-node-id="179:7202" data-name="iPhone 16 & 17 Pro - 2">
         <div className="design-3" data-node-id="I179:7202;486:2224" data-name="Status">
           <div className="design-3" data-node-id="I179:7202;486:2225" data-name="status/dark">
@@ -210,13 +209,6 @@ export default function Component091Ai() {
         <p className="design-365" data-node-id="179:7242">
           “엄마가 오늘도 같은 질문을 계속 하세요…”
         </p>
-        <div className="design-366" data-node-id="179:7243" data-name="음성 파형">
-          <div className="design-367" data-node-id="179:7244" data-name="Group">
-            <div className="design-368">
-              <img alt="" className="design-28" src={imgGroup5} />
-            </div>
-          </div>
-        </div>
         <div className="design-369" data-node-id="179:7260" data-name="mic ring">
           <div className="design-370" data-node-id="179:7261" data-name="mic">
             <div className="design-371" data-node-id="179:7262" data-name="icon/mic">

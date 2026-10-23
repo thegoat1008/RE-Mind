@@ -8,9 +8,9 @@ const imgIconChevL = `/assets/figma-v2/e499a.svg`;
 const imgIconChevR = `/assets/figma-v2/0dd52.svg`;
 const imgFrame = `/assets/figma-v2/78f72.svg`;
 const imgFrame1 = `/assets/figma-v2/16e58.svg`;
-const imgFrame2 = `/assets/figma-v2/f28bf.svg`;
-const imgFrame3 = `/assets/figma-v2/bcfd9.svg`;
-const imgIconPill = `/assets/figma-v2/d1eaf.svg`;
+const imgFrame2 = `/assets/figma-v2/52de6.svg`;
+const imgFrame3 = `/assets/figma-v2/18ef4.svg`;
+const imgIconPill = `/assets/figma-v2/790d3.svg`;
 const imgCheck = `/assets/figma-v2/bb471.svg`;
 const imgIconSun = `/assets/figma-v2/679df.svg`;
 const imgStatusDarkBackgroundMask = `/assets/figma-v2/c9227.svg`;
@@ -24,9 +24,9 @@ const imgGroup1 = `/assets/figma-v2/b119d.svg`;
 const imgGroup2 = `/assets/figma-v2/acaf5.svg`;
 const imgGroup3 = `/assets/figma-v2/90d71.svg`;
 const imgGroup4 = `/assets/figma-v2/07ec0.svg`;
-const imgGroup5 = `/assets/figma-v2/f094b.svg`;
+const imgGroup5 = `/assets/figma-v2/28f52.svg`;
 export default function Component084() {
-  return <div className="design-1" data-node-id="179:7799" data-name="08-4 말로 일정 추가">
+  return <div className="design-1" data-node-id="240:8391" data-name="08-4 말로 일정 추가">
       <div className="design-411" data-node-id="179:7800" data-name="Content">
         <div className="design-188" data-node-id="179:7801" data-name="Header">
           <p className="design-129" data-node-id="179:7802">
