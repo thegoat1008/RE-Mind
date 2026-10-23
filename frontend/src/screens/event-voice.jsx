@@ -11,7 +11,7 @@ const imgFrame1 = `/assets/figma-v2/16e58.svg`;
 const imgFrame2 = `/assets/figma-v2/52de6.svg`;
 const imgFrame3 = `/assets/figma-v2/18ef4.svg`;
 const imgIconPill = `/assets/figma-v2/790d3.svg`;
-const imgCheck = `/assets/figma-v2/bb471.svg`;
+const imgCheck = `/assets/figma-v2/2cc00.svg`;
 const imgIconSun = `/assets/figma-v2/679df.svg`;
 const imgStatusDarkBackgroundMask = `/assets/figma-v2/c9227.svg`;
 const imgNetworkSignalDark = `/assets/figma-v2/4c652.svg`;
@@ -24,7 +24,7 @@ const imgGroup1 = `/assets/figma-v2/b119d.svg`;
 const imgGroup2 = `/assets/figma-v2/acaf5.svg`;
 const imgGroup3 = `/assets/figma-v2/90d71.svg`;
 const imgGroup4 = `/assets/figma-v2/07ec0.svg`;
-const imgGroup5 = `/assets/figma-v2/28f52.svg`;
+const imgGroup5 = `/assets/figma-v2/d539c.svg`;
 export default function Component084() {
   return <div className="design-1" data-node-id="240:8391" data-name="08-4 말로 일정 추가">
       <div className="design-411" data-node-id="179:7800" data-name="Content">

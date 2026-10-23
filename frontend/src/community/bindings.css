@@ -10,7 +10,8 @@
 [data-community-live="true"] [data-community-tools] select { background: transparent; border: 0; font: inherit; }
 [data-community-live="true"] [data-community-tools] > .design-128 { flex-wrap: wrap; }
 [data-community-live="true"] [aria-disabled="true"] { opacity: .5; cursor: wait; }
-[data-screen="community"] [data-community-list] { flex: 1 1 auto; min-height: 0; height: auto; }
+[data-screen="community"] [data-community-list] { flex: 0 1 447px; min-height: 0; height: 447px; max-height: 447px; }
+[data-screen="community"] [data-community-card] .design-144 { height: 24px; gap: 4px; }
 [data-community-card] .design-144 { flex-wrap: wrap; }
 [data-community-card] .design-146,
 [data-community-live="true"] [data-name="반응"] > p { width: auto; height: auto; }
@@ -19,3 +20,5 @@
 [data-screen="write-post"] [data-node-id="179:6299"] { height: auto; width: 100%; }
 [data-community-live="true"] [aria-pressed="true"][data-name="icon/heart"] { background: rgba(75,166,55,.2); border-radius: 50%; outline: 2px solid #4ba637; }
 [data-community-live="true"][data-screen="post"] [data-node-id="220:8324"][data-name="icon/heart"] { background: transparent; outline: 0; box-shadow: none; }
+
+[data-screen="write-post"] .design-input::placeholder { color: #cac3c3; opacity: 1; }

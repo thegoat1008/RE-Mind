@@ -11,9 +11,9 @@ const imgWiFiSignalDark = `/assets/figma-v2/f883c.svg`;
 const imgBatteryDark = `/assets/figma-v2/9efe4.svg`;
 const imgTimeDarkBackgroundMask = `/assets/figma-v2/f965f.svg`;
 const img941 = `/assets/figma-v2/a1382.svg`;
-const imgIconSearch = `/assets/figma-v2/6edbc.svg`;
-const imgIconEdit = `/assets/figma-v2/e0a11.svg`;
-const imgIconHeart = `/assets/figma-v2/e6117.svg`;
+const imgIconSearch = `/assets/figma-v2/21312.svg`;
+const imgIconEdit = `/assets/figma-v2/2bcc5.svg`;
+const imgIconHeart = `/assets/figma-v2/00b0e.svg`;
 const imgIconMsg = `/assets/figma-v2/0cf73.svg`;
 const imgGroup = `/assets/figma-v2/492e0.svg`;
 const imgGroup1 = `/assets/figma-v2/9a8d3.svg`;
@@ -93,7 +93,7 @@ export default function Component10() {
           <a key={post.id} onClick={() => community.openPost(post)} aria-label={post.title} data-community-card="true" className="design-138" data-node-id="179:6321" data-name="게시글">
             <div className="design-139" data-node-id="179:6322" data-name="Frame">
               <div className="design-140" data-node-id="179:6323" data-name="tag">
-                <p className="design-141" data-node-id="179:6324">{post.mode === "EMPATHY" ? "💛 공감" : "💡 해결책"}</p>
+                <p className="design-141" data-node-id="179:6324">{post.mode === "EMPATHY" ? "💛 공감" : "👍 추천"}</p>
               </div>
               <div className="design-98" data-node-id="179:6325" data-name="Frame" />
               <p className="design-142" data-node-id="179:6326">{timeAgo(post.createdAt)}</p>

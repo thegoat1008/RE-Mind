@@ -85,7 +85,7 @@ export default function Component102() {
             <div className="design-96" data-node-id="179:6231" data-name="meta">
               <div className="design-97" data-node-id="179:6232" data-name="tag">
                 <p className="design-56" data-node-id="179:6233">
-                  👍 추천
+                  {post.mode === "EMPATHY" ? "💛 공감" : "👍 추천"}
                 </p>
               </div>
               <div className="design-98" data-node-id="179:6234" data-name="spacer" />

@@ -13,9 +13,9 @@ const imgIconChevL = `/assets/figma-v2/e499a.svg`;
 const imgIconChevR = `/assets/figma-v2/0dd52.svg`;
 const imgFrame = `/assets/figma-v2/78f72.svg`;
 const imgFrame1 = `/assets/figma-v2/16e58.svg`;
-const imgFrame2 = `/assets/figma-v2/f28bf.svg`;
-const imgFrame3 = `/assets/figma-v2/bcfd9.svg`;
-const imgPill = `/assets/figma-v2/89fb2.svg`;
+const imgFrame2 = `/assets/figma-v2/52de6.svg`;
+const imgFrame3 = `/assets/figma-v2/18ef4.svg`;
+const imgPill = `/assets/figma-v2/790d3.svg`;
 const imgCheck = `/assets/figma-v2/2cc00.svg`;
 const imgPlus = `/assets/figma-v2/096a7.svg`;
 const imgCheck1 = `/assets/figma-v2/58710.svg`;
@@ -25,7 +25,7 @@ const imgGroup1 = `/assets/figma-v2/15af7.svg`;
 const imgGroup2 = `/assets/figma-v2/492e0.svg`;
 const imgGroup3 = `/assets/figma-v2/b119d.svg`;
 const imgGroup4 = `/assets/figma-v2/acaf5.svg`;
-const imgGroup5 = `/assets/figma-v2/90d71.svg`;
+const imgGroup5 = `/assets/figma-v2/a95ec.svg`;
 const imgGroup6 = `/assets/figma-v2/07ec0.svg`;
 export default function Component08() {
   return <div className="design-1" data-node-id="179:6453" data-name="08 캘린더">

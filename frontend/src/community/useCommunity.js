@@ -87,7 +87,7 @@ export function useCommunity({ screen, route, notify }) {
     const controller = new AbortController()
     api.view(id, controller.signal).then(async value => {
       if (controller.signal.aborted) return
-      const correctScreen = value.mode === 'EMPATHY' ? 'empathy-post' : 'post'
+      const correctScreen = 'post'
       if (screen !== correctScreen) { go(`${correctScreen}?id=${id}`); return }
       setPost(value)
       try {
@@ -129,7 +129,7 @@ export function useCommunity({ screen, route, notify }) {
     setDraft(current => ({ ...current, mode: value }))
     go('write-post')
   }
-  function openPost(value) { go(`${value.mode === 'EMPATHY' ? 'empathy-post' : 'post'}?id=${value.id}`) }
+  function openPost(value) { go(`post?id=${value.id}`) }
   function save() {
     if (!form || formError) return
     if (!form.title.trim() || !form.content.trim()) { notify('제목과 내용을 모두 입력해 주세요.'); return }
@@ -211,6 +211,6 @@ export function useCommunity({ screen, route, notify }) {
     own: value => { setMine(value); setPage(0) }, setPage,
     post, postError, comments, commentError, comment, setComment, openPost, like, removePost,
     edit: () => go(`write-post?edit=${post.id}`), addComment, removeComment, moreComments,
-    back: () => { if (editId && post) openPost(post); else go(screen === 'write-post' ? 'write-mode' : 'community') }, go,
+    back: () => { if (editId && post) openPost(post); else go('community') }, go,
   }
 }

@@ -10,7 +10,7 @@ const imgBatteryDark = `/assets/figma-v2/9efe4.svg`;
 const imgTimeDarkBackgroundMask = `/assets/figma-v2/f965f.svg`;
 const img941 = `/assets/figma-v2/a1382.svg`;
 const imgIconChevL = `/assets/figma-v2/905bb.svg`;
-const imgPill = `/assets/figma-v2/67b88.svg`;
+const imgPill = `/assets/figma-v2/790d3.svg`;
 export default function Component082() {
   return <div className="design-1" data-node-id="179:7724" data-name="08-2 일정 상세">
       <div className="design-2" data-node-id="179:7725" data-name="Status Bar">
