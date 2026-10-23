@@ -78,6 +78,7 @@ button { background: transparent; }
   outline: none;
 }
 .design-input::placeholder { color: inherit; opacity: 1; }
+[data-screen="add-event"] .design-input::placeholder { color: #cac3c3; opacity: 1; }
 textarea.design-input { height: 100%; line-height: 29px; font-size: 20px; white-space: pre-wrap; }
 .original-text-line { display: block; white-space: nowrap; }
 .verification-input {
@@ -117,6 +118,7 @@ textarea.design-input { height: 100%; line-height: 29px; font-size: 20px; white-
 [data-name='Frame']:has(> [data-name='check'][data-toggled='false']) { background: #fff; border: 1px solid #d8ddda; }
 
 .like-button[aria-pressed] { background: transparent; border: 0; box-shadow: none; cursor: pointer; }
+.like-button[data-liked='false'] img { filter: grayscale(1); opacity: .6; }
 .like-button[data-liked='true'] img { filter: brightness(0) saturate(100%) invert(42%) sepia(87%) saturate(1381%) hue-rotate(328deg) brightness(96%) contrast(94%); }
 .home-event-list { display: flex; flex-direction: column; gap: 16px; max-height: 296px; width: 100%; overflow-y: auto; scrollbar-width: none; }
 .calendar-event-list { display: flex; flex-direction: column; gap: 12px; width: 100%; }

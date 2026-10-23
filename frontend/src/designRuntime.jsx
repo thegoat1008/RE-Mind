@@ -13,11 +13,11 @@ const seedCards = {
 const seedIds = new Set(['morning', 'hospital', 'family'])
 const likeNodes = {
   '179:6329': ['night', 24], '179:6346': ['tired', 41], '179:6363': ['policy', 63],
-  '179:6239': ['night', 24], '179:8065': ['tired', 41],
+  '179:6239': ['night', 24], '220:8324': ['night', 24], '179:8065': ['tired', 41],
 }
 const likeCounts = {
   '179:6331': ['night', 24], '179:6348': ['tired', 41], '179:6365': ['policy', 63],
-  '179:6241': ['night', 24], '179:8067': ['tired', 41],
+  '179:6241': ['night', 24], '220:8327': ['night', 24], '179:8067': ['tired', 41],
 }
 function LikeButton({ postId, children, ...props }) {
   const app = useContext(DesignContext)
@@ -98,23 +98,31 @@ function CalendarMonth({ children, ...props }) {
   return <div {...props}>
     <div {...oldHeader.props}>
       <button {...headerParts[0].props} type="button" aria-label="이전 달" data-interactive="true" onClick={() => move(-1)} />
-      <p {...headerParts[1].props}>{year}년 {month}월</p>
+      <div className="calendar-month-center">
+        <p {...headerParts[1].props}>{year}년 {month}월</p>
+        {app.screen === 'calendar' && <button type="button" className="calendar-today-chip" onClick={() => app.activate({ name: 'Chip (앱 화면)', label: '오늘' })}>오늘</button>}
+      </div>
       <button {...headerParts[2].props} type="button" aria-label="다음 달" data-interactive="true" onClick={() => move(1)} />
     </div>
     {nodes[1]}
-    {app.calendarMonth === '2026-10' ? nodes.slice(2) : Array.from({ length: weeks }, (_, week) =>
+    {Array.from({ length: weeks }, (_, week) =>
       <div className="design-195" key={week}>
         {Array.from({ length: 7 }, (_, weekday) => {
           const day = week * 7 + weekday - leading + 1
           if (day < 1 || day > days) return <div className="design-197" key={weekday} />
           const date = `${app.calendarMonth}-${String(day).padStart(2, '0')}`
-          const hasEvent = app.events.some((event) => occursOn(event, date))
+          const eventCount = app.events.filter((event) =>
+            (app.screen !== 'family-calendar' || event.id !== 'family') && occursOn(event, date)
+          ).length
+          const selected = app.selectedDate === date
           return <div className="design-198" key={weekday}>
-            <button type="button" className="design-199" data-choice="date" data-name="calendar-day"
+            <button type="button" className={selected ? 'design-202' : 'design-199'} data-choice="date" data-name="calendar-day"
               aria-label={`${month}월 ${day}일`} aria-pressed={app.selectedDate === date} onClick={() => app.selectDate(date)}>
-              <p className="design-190">{day}</p>
+              <p className={selected ? 'design-73' : 'design-190'}>{day}</p>
             </button>
-            {hasEvent && <div className="design-200"><img alt="" className="design-5" src="/assets/figma-v2/16e58.svg" /></div>}
+            <div className="calendar-event-dots" aria-label={eventCount ? `${eventCount}개 일정` : undefined}>
+              {Array.from({ length: eventCount }, (_, index) => <span key={index} />)}
+            </div>
           </div>
         })}
       </div>)}
@@ -174,14 +182,20 @@ function InputSlot({ children, ...props }) {
 
 function CodeSlot({ children, ...props }) {
   const app = useContext(DesignContext)
-  const value = app.fields[`${app.screen}:${props['data-node-id']}`] || ''
-  const original = React.Children.toArray(children).find((child) => child.type === 'p')
+  const index = Number(props['data-name'].split('/')[1]) - 1
+  const value = app.verificationCode[index] || ''
+  const placeholder = React.Children.toArray(children).find((child) => child.type === 'p')
+  const codeStarted = app.verificationCode.some(Boolean)
   return <div {...props}>
-    <input className={`${original?.props.className || ''} verification-input`} inputMode="numeric" maxLength={1}
+    <input className="design-295 verification-input" inputMode="numeric" maxLength={4}
       aria-label={`인증 코드 ${props['data-name'].split('/')[1]}번째 자리`}
-      placeholder={textOf(original)} value={value}
-      onChange={(event) => app.setField(props['data-node-id'], event.target.value.replace(/\D/g, '').slice(-1))} />
-    {!original && !value && children}
+      placeholder={textOf(placeholder)}
+      value={value}
+      onChange={(event) => {
+        const digits = event.target.value.replace(/\D/g, '').slice(0, 4)
+        app.setVerificationCode(index, digits)
+      }} />
+    {!placeholder && !value && !codeStarted && children}
   </div>
 }
 
@@ -191,7 +205,7 @@ const clickableNames = new Set([
   '글쓰기 FAB', '모드 카드', '대화 카드', '이전 대화', '알림', '기간 선택', '가족',
   '선택지', '버튼 O', '버튼 X', '우리 가족', '건너뛰기', '보내기', '말로 추가',
   'icon/mic', '말로 쓰기', '병원 카드', '전화 버튼', 'call', '추가', '삭제', '수정',
-  'Button (앱 화면)', 'btn 복사', 'btn 공유', '코드 공유', '일정 추가 FAB', '재전송', '개인정보 동의', 'toggle', 'check', '보기 버튼', '로그아웃',
+  'Button (앱 화면)', 'btn 복사', 'btn 공유', '코드 공유', '일정 추가 FAB', '재전송', '개인정보 동의', 'toggle', 'check', '보기 버튼', '로그아웃', 'icon/cal',
 ])
 
 function ActionNode({ element, children, ...props }) {
@@ -236,6 +250,7 @@ export function h(type, props, ...children) {
   if (seedCards[nodeId]) return React.createElement(EventCard, { ...props, eventId: seedCards[nodeId] }, ...children)
   if (type === 'p' && props?.className === 'design-213') return React.createElement(EventText, props, ...children)
   if (type === 'p' && props?.className === 'design-212') return React.createElement(EventText, { ...props, title: true }, ...children)
+  if (name === 'icon/cal') return React.createElement(ActionNode, { ...props, element: type }, ...children)
   if (name === '오늘의 일정') return React.createElement(EventList, { ...props, home: true }, ...children)
   if (name === '일정 목록') return React.createElement(EventList, { ...props, className: `${props.className} dynamic-event-list` }, ...children)
   if (name === '월간 캘린더') return React.createElement(CalendarMonth, props, ...children)

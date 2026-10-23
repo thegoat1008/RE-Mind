@@ -10,8 +10,8 @@ const imgBatteryDark = `/assets/figma-v2/9efe4.svg`;
 const imgTimeDarkBackgroundMask = `/assets/figma-v2/f965f.svg`;
 const img941 = `/assets/figma-v2/a1382.svg`;
 const imgIconX = `/assets/figma-v2/2ebcb.svg`;
-const imgIconCal = `/assets/figma-v2/2f575.svg`;
-const imgIconClock = `/assets/figma-v2/6cdc4.svg`;
+const imgIconCal = `/assets/figma-v2/08a04.svg`;
+const imgIconClock = `/assets/figma-v2/c326b.svg`;
 const imgToggle = `/assets/figma-v2/463bf.svg`;
 export default function Component081() {
   return <div className="design-1" data-node-id="179:6410" data-name="08-1 일정 추가">
