@@ -382,6 +382,9 @@
 .design-382{align-content:stretch;cursor:pointer;display:flex;flex-direction:column;gap:14px;align-items:flex-start;overflow:clip;position:relative;flex-shrink:0;width:100%}
 .design-383{background:var(--card,white);border-width:1.5px;border-color:var(--border,#e1e6e4);border-style:solid;align-content:stretch;display:flex;gap:18px;align-items:center;overflow:clip;padding-left:22px;padding-right:18px;padding-top:24px;padding-bottom:24px;position:relative;border-radius:24px;flex-shrink:0;width:100%}
 .design-384{background:rgba(75,166,55,0.2);align-content:stretch;display:flex;align-items:center;justify-content:center;overflow:clip;position:relative;border-radius:999px;flex-shrink:0;width:64px;height:64px}
+.design-chat-mode-icon{position:relative;flex-shrink:0}
+.design-chat-mode-icon--bulb{width:35px;height:35px}
+.design-chat-mode-icon--heart{width:29px;height:29px}
 .design-385{word-break:break-word;align-content:stretch;display:flex;flex:1 0 0;flex-direction:column;gap:4px;align-items:flex-start;min-width:1px;overflow:clip;position:relative;text-align:left}
 .design-386{font-family:'Noto Sans KR',sans-serif;font-weight:700;line-height:32px;position:relative;flex-shrink:0;color:#1a4710;font-size:24px;width:100%}
 .design-387{position:absolute;inset:20.83% 33.33% 20.83% 37.5%}

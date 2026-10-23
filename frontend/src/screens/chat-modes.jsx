@@ -10,6 +10,8 @@ const imgWiFiSignalDark = `/assets/figma-v2/f883c.svg`;
 const imgBatteryDark = `/assets/figma-v2/9efe4.svg`;
 const imgTimeDarkBackgroundMask = `/assets/figma-v2/f965f.svg`;
 const img941 = `/assets/figma-v2/a1382.svg`;
+const imgReiconBulb = `/assets/figma-v2/5cd06.svg`;
+const imgIconHeart = `/assets/figma-v2/d859c.svg`;
 const imgGroup = `/assets/figma-v2/81955.svg`;
 const imgGroup1 = `/assets/figma-v2/fb968.svg`;
 const imgGroup2 = `/assets/figma-v2/492e0.svg`;
@@ -80,9 +82,9 @@ export default function Component092Ai() {
         <div className="design-382" data-node-id="179:7395" data-name="선택">
           <a className="design-383" data-node-id="179:7396" data-name="모드 카드">
             <div className="design-384" data-node-id="179:7397" data-name="icon">
-              <p className="design-extra-6" data-node-id="196:5768">
-                💡
-              </p>
+              <div className="design-chat-mode-icon design-chat-mode-icon--bulb" data-node-id="220:7668" data-name="reicon:bulb">
+                <img alt="" className="design-5" src={imgReiconBulb} />
+              </div>
             </div>
             <div className="design-385" data-node-id="179:7401" data-name="text">
               <p className="design-386" data-node-id="179:7402">
@@ -102,9 +104,9 @@ export default function Component092Ai() {
           </a>
           <a className="design-383" data-node-id="179:7407" data-name="모드 카드">
             <div className="design-384" data-node-id="179:7408" data-name="icon">
-              <p className="design-extra-6" data-node-id="196:5769">
-                💛
-              </p>
+              <div className="design-chat-mode-icon design-chat-mode-icon--heart" data-node-id="220:7671" data-name="icon/heart">
+                <img alt="" className="design-5" src={imgIconHeart} />
+              </div>
             </div>
             <div className="design-385" data-node-id="179:7412" data-name="text">
               <p className="design-386" data-node-id="179:7413">

@@ -57,7 +57,7 @@ export default function Component101() {
               <img alt="" className="design-5" src={imgIconChevL} />
             </div>
           </a>
-          <p className="design-19" data-node-id="179:6272">{community.editId ? "글 수정" : community.form?.mode === "EMPATHY" ? "공감 글쓰기" : "해결책 글쓰기"}</p>
+          <p className="design-19" data-node-id="179:6272">{community.editId ? "글 수정" : "글쓰기"}</p>
         </div>
         <div className="design-20" data-node-id="179:6278" data-name="field/제목">
           <p className="design-21" data-node-id="179:6279">
@@ -73,7 +73,7 @@ export default function Component101() {
             내용
           </p>
           <div className="design-113" data-node-id="179:6284" data-name="textarea">
-            <textarea className="design-input" aria-label="내용" placeholder={"마음을 편하게 적어 주세요.\n경험을 나누면 다른 보호자에게 큰 힘이 돼요."} maxLength={5000} disabled={!community.form || community.busy}
+            <textarea className="design-input" aria-label="내용" placeholder="마음을 편하게 적어 주세요" maxLength={5000} disabled={!community.form || community.busy}
               value={community.form?.content || ""} onChange={event => community.setField("content", event.target.value)} />
             <div className="design-117" data-node-id="179:6286" data-name="말로 쓰기">
               <div className="design-67" data-node-id="179:6287" data-name="icon/mic">
