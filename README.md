@@ -148,3 +148,17 @@ docs: 프로젝트 실행 방법 수정
 - 병합이 끝난 작업 브랜치는 삭제합니다.
 
 연결 참고: [Aiven MySQL 연결 정보](https://aiven.io/docs/products/mysql/howto/connect-with-dbeaver), [Aiven TLS 인증서](https://aiven.io/docs/platform/concepts/tls-ssl-certificates)
+
+## 온이 AI MVP — VS Code로 시작하기
+
+AI 기능의 로컬 시연에는 Aiven 없이 사용하는 `oni` 프로필이 있다. `RE-Mind.code-workspace`를 VS Code에서 열고 추천 Java 확장을 설치한 뒤, `Terminal → Run Task`에서 `온이: 프런트 의존성 설치`, `온이: 백엔드 실행`, `온이: 프런트 실행`을 순서대로 실행한다. 백엔드와 프런트는 별도 터미널에서 계속 실행된다.
+
+실행 후 기본 주소 `http://localhost:5173/#/chat-modes`로 온이 대화 모드를 연다. AI API는 `oni` 프로필에서만 활성화되며, 일반 `dev`·`prod` 실행에서는 제공하지 않는다.
+
+터미널에서는 저장소 루트에서 `sh scripts/start-backend.sh`를 실행하고, 다른 터미널의 `frontend` 폴더에서 `npm ci` 후 `npm run dev`를 실행한다. Java 17과 Node.js가 필요하며 전역 Gradle은 필요 없다.
+
+기본 모드는 **외부 AI를 호출하지 않는 데모**다. 실제 Gemini 연결은 `.env`에 `ONI_AI_PROVIDER=gemini`, `GEMINI_API_KEY`, `GEMINI_MODEL`을 설정한 뒤 백엔드를 재시작한다. Gemini 오류를 데모 답변으로 대체하지 않는다. 무료 API 시연은 가상 정보만 사용하고 [공식 이용 조건](https://ai.google.dev/gemini-api/terms)을 확인한다.
+
+정책은 서버의 검토 자료를 근거로 안내하고, 일정은 **미저장 초안**만 만든다. 대화는 임시 세션과 H2 메모리 DB를 사용하므로 서버 재시작 시 초기화된다. 운영 로그인, 실제 병원 예약, 캘린더 저장은 이번 MVP 범위에 포함되지 않는다.
+
+구조, 판단 기준, API 규격, VS Code 디버깅, 테스트와 후속 작업은 [온이 AI MVP 개발 안내](docs/AI-MVP.md)에 정리했다.

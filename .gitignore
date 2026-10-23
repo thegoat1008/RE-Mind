@@ -5,7 +5,13 @@
 backend/certs/*
 !backend/certs/.gitkeep
 .idea/
-.vscode/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/tasks.json
+!.vscode/settings.json
+.local-gradle/
+backend/data/
 
 # Java / Gradle
 backend/.gradle/

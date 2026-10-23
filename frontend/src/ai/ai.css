@@ -1,0 +1,116 @@
+/* Scoped to the functional AI screens; the team's other Figma screens stay intact. */
+.oni-workspace{height:100%;width:100%;display:flex;flex-direction:column;background:#fff;color:#222927;overflow:hidden;font-family:'Noto Sans KR',sans-serif}
+.oni-workspace button{cursor:pointer;text-align:left}
+.oni-workspace button:disabled{cursor:default;opacity:.48}
+.oni-workspace button:focus-visible,.oni-workspace a:focus-visible,.oni-workspace summary:focus-visible,.oni-workspace input:focus-visible,.oni-workspace textarea:focus-visible{outline:2px solid #2f7d6d;outline-offset:3px}
+.oni-status{height:54px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:0 25px 0 30px;font-size:15px;font-weight:700}
+.oni-status>div{display:flex;align-items:center;gap:6px}
+.oni-status img{height:12px;width:auto;max-width:25px}
+.oni-header{display:flex;align-items:center;gap:12px;padding:6px 20px 12px;flex-shrink:0;min-height:66px}
+.oni-character{width:48px;height:48px;object-fit:contain;flex-shrink:0}
+.oni-header h1{font-size:22px;line-height:31px;letter-spacing:-.22px}
+.oni-header p{font-size:14px;color:#65706c;margin-top:1px}
+.oni-header>div{flex:1;min-width:0}
+.oni-header .oni-text-button{font-size:13px;white-space:nowrap}
+.oni-back{font-size:34px;width:22px;line-height:40px;color:#65706c}
+.oni-provider{margin:0 20px 10px;padding:9px 12px;border-radius:12px;background:#e3f1ed;color:#285e53;font-size:12px;line-height:1.6;flex-shrink:0;display:flex;flex-direction:column;gap:2px}
+.oni-provider.is-demo{background:#fff5df;color:#775a23}
+.oni-provider strong{font-size:12px}
+.oni-provider button{color:inherit;text-decoration:underline;font-size:12px;align-self:flex-start;margin-top:2px}
+.oni-notice{margin:0 20px 8px;font-size:12px;color:#775a23;line-height:1.6}
+.oni-scroll{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#d7e1dd transparent}
+.oni-mode-content{padding:12px 20px 22px}
+.oni-mode-content h2{font-size:28px;line-height:1.45;letter-spacing:-.5px;margin-bottom:8px}
+.oni-muted{color:#65706c}
+.oni-mode-content>.oni-muted{font-size:17px;margin-bottom:22px}
+.oni-mode-card{width:100%;display:flex;align-items:center;gap:15px;border:1.5px solid #e1e6e4;border-radius:24px;padding:22px 18px;margin-bottom:14px;background:#fff}
+.oni-mode-card>span:nth-child(2){flex:1;min-width:0}
+.oni-mode-card strong{font-size:19px;line-height:1.5;display:block;letter-spacing:-.3px}
+.oni-mode-card small{font-size:14px;line-height:1.7;color:#65706c;display:block;margin-top:4px;word-break:keep-all}
+.oni-mode-card>span:last-child{font-size:25px;color:#65706c}
+.oni-mode-icon{width:48px;height:48px;background:#e3f1ed;border-radius:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.oni-mode-icon img{height:25px;width:25px;object-fit:contain}
+.oni-resume{display:flex;justify-content:space-between;width:100%;padding:13px 16px;margin:0 0 16px;border-radius:14px;background:#e3f1ed;color:#2f7d6d;font-size:15px;font-weight:600}
+.oni-resume span{font-size:13px;font-weight:400}
+.oni-history-link{width:100%;display:flex;align-items:center;justify-content:space-between;padding:17px 4px;font-size:17px;color:#65706c}
+.oni-history-link span{font-size:24px}
+.oni-medical{margin-top:17px;text-align:center;color:#65706c;font-size:13px}
+.oni-privacy{text-align:center;font-size:12px;line-height:1.8;color:#65706c;margin-top:8px;word-break:keep-all}
+.oni-nav{display:flex;align-items:flex-start;flex-shrink:0;width:100%;background:#fff;border-top:1px solid #e1e6e4;padding:10px 8px 24px}
+.oni-nav button{min-width:0;flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;color:#65706c;font-size:17px;line-height:24px;font-weight:500}
+.oni-nav img{width:26px;height:26px;padding:2px;object-fit:contain}
+.oni-nav [aria-current='page']{color:#2f7d6d}
+.oni-chat-meta{display:flex;align-items:center;gap:8px;flex-shrink:0;margin:0 20px 10px}
+.oni-chat-meta p{font-size:11px;color:#65706c;word-break:keep-all}
+.oni-mode-tag{background:#e3f1ed;color:#2f7d6d;border-radius:999px;padding:4px 10px;display:inline-block;font-size:12px;white-space:nowrap;font-weight:500}
+.oni-messages{padding:6px 20px 18px;scroll-behavior:smooth}
+.oni-welcome{padding:28px 14px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px}
+.oni-welcome img{width:90px;height:90px}
+.oni-welcome h2{font-size:21px}
+.oni-welcome p{font-size:16px;line-height:1.85;color:#65706c;word-break:keep-all}
+.oni-welcome span{font-size:12px;color:#65706c;line-height:1.8;word-break:keep-all}
+.oni-message{margin-bottom:20px;display:flex;flex-direction:column;align-items:flex-start;gap:6px;overflow-wrap:anywhere}
+.oni-speaker{font-size:12px;color:#65706c;margin:0 3px}
+.oni-bubble{max-width:94%;background:#f2f5f3;border-radius:4px 20px 20px 20px;padding:14px 16px;font-size:16px;line-height:1.85;white-space:pre-wrap;word-break:break-word}
+.oni-message.is-user{align-items:flex-end}
+.oni-message.is-user .oni-bubble{background:#2f7d6d;color:#fff;border-radius:20px 4px 20px 20px}
+.oni-sources{width:100%;display:flex;flex-direction:column;gap:10px;margin-top:5px}
+.oni-source,.oni-schedule{width:100%;border:1px solid #dce7e2;border-radius:18px;padding:15px;background:#fff}
+.oni-source h3,.oni-schedule h3{font-size:17px;margin:6px 0 8px;line-height:1.65;word-break:keep-all}
+.oni-source p,.oni-schedule p{font-size:13px;line-height:1.9;margin-top:5px}
+.oni-source a{display:inline-block;font-size:13px;font-weight:600;color:#2f7d6d;text-decoration:underline;margin:12px 0 6px}
+.oni-source small,.oni-schedule small{font-size:11px;line-height:1.85;color:#65706c;display:block}
+.oni-eyebrow{font-size:11px;letter-spacing:.2px;font-weight:600;color:#2f7d6d}
+.oni-schedule{background:#faf9f5;border-color:#e9e2d4;margin-top:5px}
+.oni-schedule .oni-card-top strong{font-size:11px;color:#87692e}
+.oni-schedule .oni-draft-note{border-top:1px solid #e9e2d4;padding-top:10px;margin-top:10px;color:#775a23;font-size:12px}
+.oni-missing{color:#775a23}
+.oni-card-top{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%}
+.oni-decision{width:100%;margin-top:5px;color:#65706c;font-size:11px}
+.oni-decision summary{cursor:pointer;padding:6px 0}
+.oni-decision dl{display:grid;grid-template-columns:62px 1fr;gap:6px;padding:10px;background:#f5f6f5;border-radius:10px;margin:0}
+.oni-decision dd{margin:0;overflow-wrap:anywhere}
+.oni-thinking{font-size:13px;color:#65706c;padding:0 3px 12px}
+.oni-composer{flex-shrink:0;border-top:1px solid #edf0ee;padding:8px 20px 10px;background:#fff}
+.oni-region{font-size:12px;color:#65706c;margin-bottom:8px}
+.oni-region summary{cursor:pointer;padding:2px 0}
+.oni-region label{display:flex;align-items:center;gap:8px;margin-top:8px}
+.oni-region input{background:#f4f7f5;border:1px solid #e1e6e4;border-radius:9px;padding:7px 9px;min-width:0;flex:1;font-size:12px;outline:none}
+.oni-compose-row{display:flex;gap:8px;align-items:flex-end;border:1px solid #dce4df;border-radius:22px;padding:10px 8px 10px 15px}
+.oni-compose-row textarea{background:transparent;min-width:0;flex:1;font-size:15px;line-height:1.7;resize:none;border:0;outline:none;max-height:112px;height:52px;overflow:auto;padding:0}
+.oni-compose-row textarea::placeholder{color:#78847e}
+.oni-compose-actions{display:flex;align-items:center;gap:5px;padding-bottom:1px}
+.oni-compose-actions button{width:34px;height:34px;display:flex;align-items:center;justify-content:center;border-radius:50%;flex-shrink:0}
+.oni-compose-actions img{width:19px;height:19px;object-fit:contain}
+.oni-compose-actions .oni-send{background:#2f7d6d}
+.oni-compose-actions .oni-send:disabled{background:#a8c5bc;opacity:1}
+.oni-mic.is-recording{background:#f8e8e5}
+.oni-stop{display:block;width:12px;height:12px;background:#b04d40;border-radius:3px}
+.oni-composer-foot{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;font-size:10px;line-height:1.7;color:#78847e;padding:5px 2px 0}
+.oni-composer-foot>span:last-child{flex-shrink:0}
+.oni-voice-info{font-size:12px;color:#2f7d6d;background:#edf6f2;border-radius:12px;padding:10px;margin:0 0 9px;line-height:1.75}
+.oni-voice-info small{font-size:10px;color:#65706c;display:block;margin-top:4px}
+.oni-voice-info .oni-interim{color:#65706c;font-style:italic}
+.oni-history-content{padding:8px 20px 22px}
+.oni-list-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.oni-list-title h2{font-size:22px}
+.oni-small{font-size:12px;line-height:1.8}
+.oni-history-content>.oni-small{margin-bottom:18px}
+.oni-history-card{border:1.5px solid #e1e6e4;border-radius:22px;padding:16px;margin-bottom:14px}
+.oni-history-open{width:100%;display:flex;flex-direction:column;gap:10px}
+.oni-history-open strong{font-size:17px;line-height:1.7;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.oni-history-open .oni-card-top small{font-size:11px;color:#65706c}
+.oni-history-open>.oni-small{color:#2f7d6d}
+.oni-delete{display:block;margin-left:auto;font-size:12px;color:#65706c;padding:5px 0 0 8px;text-decoration:underline}
+.oni-delete-confirm{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end;border-top:1px solid #e1e6e4;padding-top:10px;margin-top:10px;font-size:12px}
+.oni-delete-confirm p{width:100%;color:#65706c}
+.oni-delete-confirm button{padding:5px 9px;border:1px solid #e1e6e4;border-radius:8px}
+.oni-danger{color:#a34437}
+.oni-text-button{font-size:12px;color:#2f7d6d;text-decoration:underline;padding:5px 0}
+.oni-error{background:#fff0ec;border:1px solid #f0d4cb;color:#8f4231;border-radius:14px;padding:12px;font-size:13px;line-height:1.8;margin:10px 0}
+.oni-error .oni-text-button{color:#8f4231;margin-top:5px}
+.oni-safety{background:#fff5df;border:1px solid #e9dab7;border-radius:12px;padding:12px;font-size:13px;line-height:1.8;color:#775a23;width:100%}
+.oni-loading{font-size:13px;color:#65706c;padding:10px 20px}
+.oni-empty{display:flex;flex-direction:column;align-items:center;gap:20px;padding:40px 0;color:#65706c;font-size:15px}
+.oni-primary{padding:12px 20px;background:#2f7d6d;color:#fff;border-radius:14px;font-size:15px}
+.oni-sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}

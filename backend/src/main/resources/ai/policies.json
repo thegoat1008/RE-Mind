@@ -1,0 +1,62 @@
+[
+  {
+    "id": "family-class",
+    "title": "치매안심센터 가족교실",
+    "summary": "돌봄을 이해하는 교육입니다. 지역별 운영 여부와 일정을 확인하세요.",
+    "eligibility": "치매 또는 경도인지장애 진단을 받은 사람의 가족·보호자 대상 안내입니다. 참여 가능 여부는 센터가 확인합니다.",
+    "application": "거주지 치매안심센터에 참여 절차와 모집 일정을 문의하세요.",
+    "sourceUrl": "https://www.easylaw.go.kr/CSP/CnpClsMainBtr.laf?ccfNo=2&cciNo=4&cnpClsNo=1&csmSeq=854&popMenu=ov",
+    "verifiedAt": "2026-10-23",
+    "keywords": ["가족교실", "가족교육", "돌봄교육", "보호자교육", "돌보는방법", "돌봄방법"]
+  },
+  {
+    "id": "family-self-help",
+    "title": "치매가족 자조모임",
+    "summary": "보호자가 경험을 나누는 모임입니다. 지역별 참여 방식은 다릅니다.",
+    "eligibility": "치매·경도인지장애 가족과 보호자를 위한 안내입니다.",
+    "application": "치매안심센터 또는 중앙치매센터의 우리동네자조모임에서 참여 방법을 확인하세요.",
+    "sourceUrl": "https://www.easylaw.go.kr/CSP/CnpClsMainBtr.laf?ccfNo=2&cciNo=4&cnpClsNo=1&csmSeq=854&popMenu=ov",
+    "verifiedAt": "2026-10-23",
+    "keywords": ["자조모임", "보호자모임", "가족모임", "경험나눔", "다른보호자", "보호자소통"]
+  },
+  {
+    "id": "family-healing",
+    "title": "치매가족 힐링프로그램",
+    "summary": "미술·운동 등의 활동으로 돌봄 부담을 덜도록 돕습니다. 지역별 내용은 다릅니다.",
+    "eligibility": "치매·경도인지장애 가족과 보호자를 위한 프로그램 안내입니다.",
+    "application": "치매안심센터에 운영 여부, 참여 조건과 일정을 확인하세요.",
+    "sourceUrl": "https://www.easylaw.go.kr/CSP/CnpClsMainBtr.laf?ccfNo=2&cciNo=4&cnpClsNo=1&csmSeq=854&popMenu=ov",
+    "verifiedAt": "2026-10-23",
+    "keywords": ["힐링프로그램", "힐링", "보호자스트레스", "정서지원", "가족프로그램", "보호자휴식"]
+  },
+  {
+    "id": "companion-care",
+    "title": "가족 프로그램 참여 중 동반치매환자보호서비스",
+    "summary": "센터 가족 프로그램 참여 중 동반 환자 보호를 돕습니다. 상시 돌봄과 구분됩니다.",
+    "eligibility": "센터 가족 프로그램에 참여하는 보호자가 동반한 치매환자 대상입니다.",
+    "application": "프로그램 신청 시 치매안심센터에 이용 가능 여부를 확인하세요.",
+    "sourceUrl": "https://www.easylaw.go.kr/CSP/CnpClsMainBtr.laf?ccfNo=2&cciNo=4&cnpClsNo=1&csmSeq=854&popMenu=ov",
+    "verifiedAt": "2026-10-23",
+    "keywords": ["동반치매환자", "동반보호", "수업동안", "교육받는동안", "프로그램참여중", "가족교실동안"]
+  },
+  {
+    "id": "long-term-home-care",
+    "title": "노인장기요양보험 방문요양",
+    "summary": "장기요양요원이 가정을 방문해 신체활동과 가사활동을 지원하는 재가급여입니다.",
+    "eligibility": "장기요양 인정과 이용계획에 따른 확인이 필요합니다. 치매 진단만으로 이용이 확정되지 않습니다.",
+    "application": "국민건강보험공단에서 인정 절차를 확인하고, 이용 가능한 급여와 기관 계약을 상담하세요.",
+    "sourceUrl": "https://www.nhis.or.kr/static/html/wbda/c/wbdac04.html",
+    "verifiedAt": "2026-10-23",
+    "keywords": ["방문요양", "재가급여", "집에서돌봄", "집으로", "요양보호사", "가사도움", "장기요양", "돌봄서비스"]
+  },
+  {
+    "id": "long-term-day-care",
+    "title": "노인장기요양보험 주·야간보호",
+    "summary": "하루 중 일정 시간 기관에서 보호와 활동 지원을 제공하는 재가급여입니다.",
+    "eligibility": "장기요양 인정과 이용계획에 따른 확인이 필요합니다. 등급별 이용 가능 급여는 공단에 확인하세요.",
+    "application": "국민건강보험공단과 지역 장기요양기관에 절차·비용·이용 가능 시간을 확인하세요.",
+    "sourceUrl": "https://www.nhis.or.kr/static/html/wbda/c/wbdac04.html",
+    "verifiedAt": "2026-10-23",
+    "keywords": ["주야간보호", "주·야간보호", "주간보호", "야간보호", "낮동안", "잠깐맡", "돌봄을맡", "장기요양", "돌봄서비스"]
+  }
+]

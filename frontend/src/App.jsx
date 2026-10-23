@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { DesignContext } from './designRuntime.jsx'
 import manifest from './screenManifest.json'
+import AiWorkspace from './ai/AiWorkspace.jsx'
 import './design.css'
 import './designPrecision.css'
 
@@ -19,6 +20,7 @@ export default function App() {
   const [toast, setToast] = useState('')
   const [postMode, setPostMode] = useState('solution')
   const Screen = modules[`./screens/${screen}.jsx`].default
+  const isAiScreen = ['chat-modes', 'chat', 'chat-history', 'chat-voice'].includes(screen)
 
   useEffect(() => {
     const update = () => setScreen(currentScreen())
@@ -162,8 +164,8 @@ export default function App() {
   return (
     <DesignContext.Provider value={context}>
       <main className="desktop-stage">
-        <div className="app-viewport" data-screen={screen} key={screen}>
-          <Screen />
+        <div className="app-viewport" data-screen={screen} key={isAiScreen ? 'ai-workspace' : screen}>
+          {isAiScreen ? <AiWorkspace screen={screen} go={go} /> : <Screen />}
           {toast && <div className="app-toast" role="status">{toast}</div>}
         </div>
       </main>

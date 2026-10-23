@@ -1,0 +1,15 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "온이 API 디버그 (oni)",
+      "request": "launch",
+      "mainClass": "com.remind.RemindApplication",
+      "projectName": "remind-backend",
+      "cwd": "${workspaceFolder}/backend",
+      "args": "--spring.profiles.active=oni",
+      "console": "integratedTerminal"
+    }
+  ]
+}
