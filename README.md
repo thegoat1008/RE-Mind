@@ -4,7 +4,7 @@ Spring Boot + React(JavaScript) + Aiven MySQL 웹앱입니다.
 
 ## 필요한 프로그램
 
-- JDK 17 (백엔드 컴파일에 사용하는 버전)
+- JDK 17 (팀 공통 버전: 프로젝트 SDK, Gradle JVM, 백엔드 컴파일 모두 17로 통일)
 - Node.js 20.19 이상 또는 22.12 이상
 - Aiven MySQL 서비스
 
