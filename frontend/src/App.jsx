@@ -4,6 +4,8 @@ import manifest from './screenManifest.json'
 import { initialEvents, DEMO_DATE, parseDate, parseTime, formatTime, formatDate, localDate, occursOn } from './calendarData.js'
 import './design.css'
 import './designPrecision.css'
+import { CommunityContext, communityScreens, useCommunity } from './community/useCommunity.js'
+import './community/bindings.css'
 
 const modules = import.meta.glob('./screens/*.jsx', { eager: true })
 const screenNames = new Set(manifest.map((screen) => screen.key))
@@ -16,8 +18,8 @@ const parents = {
   'write-mode': 'community', 'write-post': 'write-mode', post: 'community', 'empathy-post': 'community',
   'family-codes': 'settings', hospitals: 'settings', policies: 'settings', emergency: 'settings',
 }
-function currentScreen() {
-  const key = window.location.hash.replace(/^#\/?/, '')
+function currentScreen(route) {
+  const key = route.replace(/^#\/?/, '').split('?')[0]
   return screenNames.has(key) ? key : 'welcome'
 }
 
@@ -35,7 +37,8 @@ function useLocalState(key, fallback) {
 }
 
 export default function App() {
-  const [screen, setScreen] = useState(currentScreen)
+  const [route, setRoute] = useState(() => window.location.hash)
+  const screen = currentScreen(route)
   const [fields, setFields] = useState({})
   const [verificationCode, setVerificationCodeState] = useState(['', '', '', ''])
   const [datePickerOpen, setDatePickerOpen] = useState(false)
@@ -43,16 +46,15 @@ export default function App() {
   const [toast, setToast] = useState('')
   const [notificationsRead, setNotificationsRead] = useState(false)
   const [events, setEvents] = useLocalState('remind-events-v1', initialEvents)
-  const [likes, setLikes] = useLocalState('remind-likes-v1', {})
   const [selectedDate, setSelectedDate] = useLocalState('remind-date-v1', DEMO_DATE)
   const [calendarMonth, setCalendarMonth] = useState(selectedDate.slice(0, 7))
   const [selectedEventId, setSelectedEventId] = useState(null)
   const [editingEventId, setEditingEventId] = useState(null)
-  const [postMode, setPostMode] = useState('solution')
+  const community = useCommunity({ screen, route, notify: setToast })
   const Screen = modules[`./screens/${screen}.jsx`].default
 
   useEffect(() => {
-    const update = () => setScreen(currentScreen())
+    const update = () => setRoute(window.location.hash)
     window.addEventListener('hashchange', update)
     return () => window.removeEventListener('hashchange', update)
   }, [])
@@ -60,7 +62,7 @@ export default function App() {
     document.title = `RE:MIND · ${manifest.find((item) => item.key === screen).name.replace(/^\S+ /, '')}`
     window.scrollTo(0, 0)
     setToast('')
-  }, [screen])
+  }, [route])
   useEffect(() => {
     if (!toast) return
     const timer = window.setTimeout(() => setToast(''), 3500)
@@ -140,6 +142,15 @@ export default function App() {
     if (name.startsWith('tab/')) {
       return go({ home: 'home', calendar: 'calendar', chat: 'chat-modes', community: 'community', settings: 'settings' }[name.slice(4)])
     }
+    if (communityScreens.has(screen)) {
+      if (name === '뒤로 버튼') return community.back()
+      if (name === '글쓰기 FAB') return community.go('write-mode')
+      if (screen === 'write-mode' && name === '모드 카드') return community.chooseMode(/공감/.test(label) ? 'EMPATHY' : 'SOLUTION')
+      if (screen === 'write-post' && ['말로 쓰기', 'icon/mic'].includes(name)) return community.dictate()
+      if (['post', 'empathy-post'].includes(screen) && name === 'icon/mic') return community.dictate('comment')
+      if (['post', 'empathy-post'].includes(screen) && name === '보내기') return community.addComment()
+      return
+    }
     if (name === '뒤로 버튼') return go(parents[screen] || 'home')
     if (name === 'icon/cal') return openDatePicker()
     if (name === 'calendar-day') return selectDate(`${calendarMonth}-${String(Number(label)).padStart(2, '0')}`)
@@ -218,14 +229,6 @@ export default function App() {
     if (screen === 'chat-history' && name === '대화 카드') return go('chat')
     if (screen === 'chat-voice' && name === 'Button (앱 화면)') return go('chat')
     if (screen === 'chat' && name === '보내기') return setToast('입력한 내용은 전송되지 않아요. AI 답변은 서버 연동 후 받을 수 있어요.')
-    if (screen === 'community' && name === '게시글') return go(/공감/.test(label) ? 'empathy-post' : 'post')
-    if (screen === 'write-mode' && name === '모드 카드') {
-      setPostMode(/공감/.test(label) ? 'empathy' : 'solution'); return go('write-post')
-    }
-    if (screen === 'write-post' && label === '글 올리기') {
-      saveDraft('post'); return go(postMode === 'empathy' ? 'empathy-post' : 'post')
-    }
-    if (['post', 'empathy-post'].includes(screen) && name === '보내기') return setToast('댓글 등록은 서버 연동 후 사용할 수 있어요.')
     if (screen === 'settings') {
       if (/병원 찾기/.test(label)) return go('hospitals')
       if (/치매 정책/.test(label)) return go('policies')
@@ -242,7 +245,6 @@ export default function App() {
     events, selectedDate, calendarMonth, selectDate, setCalendarMonth,
     selectedEvent: events.find((event) => event.id === selectedEventId),
     eventsForDate: events.filter((event) => occursOn(event, selectedDate)),
-    likes, toggleLike: (id) => setLikes((current) => ({ ...current, [id]: !current[id] })),
     toggleEvent: (id) => setEvents((current) => current.map((event) => event.id === id ? {
       ...event, completedDates: { ...event.completedDates, [selectedDate]: !event.completedDates[selectedDate] },
     } : event)),
@@ -252,8 +254,9 @@ export default function App() {
   }
   return (
     <DesignContext.Provider value={context}>
+      <CommunityContext.Provider value={community}>
       <main className="desktop-stage">
-        <div className="app-viewport" data-screen={screen} key={screen}>
+        <div className="app-viewport" data-screen={screen} data-community-live={communityScreens.has(screen)} key={route}>
           <Screen />
           {toast && <div className="app-toast" role="status">{toast}</div>}
           {datePickerOpen && screen === 'add-event' && <div className="date-picker-backdrop" onClick={() => setDatePickerOpen(false)}>
@@ -277,6 +280,7 @@ export default function App() {
           </div>}
         </div>
       </main>
+      </CommunityContext.Provider>
     </DesignContext.Provider>
   )
 }

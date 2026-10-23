@@ -10,6 +10,7 @@ backend/certs/*
 # Java / Gradle
 backend/.gradle/
 backend/build/
+backend/bin/
 
 # Node / Vite
 frontend/node_modules/
@@ -17,3 +18,8 @@ frontend/dist/
 
 # Logs
 *.log
+backend/data/
+.gradle-user/
+.pnpm-store/
+verification/
+.community-processes.json

@@ -2,6 +2,8 @@
 /** @jsx h */
 /** @jsxFrag Fragment */
 import { h, Fragment } from '../designRuntime.jsx'
+import { useCommunityData } from '../community/useCommunity.js'
+
 
 const imgStatusDarkBackgroundMask = `/assets/figma-v2/c9227.svg`;
 const imgNetworkSignalDark = `/assets/figma-v2/4c652.svg`;
@@ -13,6 +15,8 @@ const imgIconChevL = `/assets/figma-v2/905bb.svg`;
 const imgGroup = `/assets/figma-v2/f405f.svg`;
 const imgGroup1 = `/assets/figma-v2/daa30.svg`;
 export default function Component101() {
+  const community = useCommunityData();
+  const post = community.post;
   return <div className="design-1" data-node-id="179:6265" data-name="10-1 글쓰기">
       <div className="design-2" data-node-id="179:6266" data-name="Status Bar">
         <div className="design-3" data-node-id="I179:6266;486:2224" data-name="Status">
@@ -53,18 +57,15 @@ export default function Component101() {
               <img alt="" className="design-5" src={imgIconChevL} />
             </div>
           </a>
-          <p className="design-19" data-node-id="179:6272">
-            글쓰기
-          </p>
+          <p className="design-19" data-node-id="179:6272">{community.editId ? "글 수정" : community.form?.mode === "EMPATHY" ? "공감 글쓰기" : "해결책 글쓰기"}</p>
         </div>
         <div className="design-20" data-node-id="179:6278" data-name="field/제목">
           <p className="design-21" data-node-id="179:6279">
             제목
           </p>
           <div className="design-112" data-node-id="179:6280" data-name="input">
-            <p className="design-91" data-node-id="179:6281">
-              제목을 입력하세요
-            </p>
+            <input className="design-91 design-input" aria-label="제목" placeholder="제목을 입력하세요" maxLength={120} disabled={!community.form || community.busy}
+              value={community.form?.title || ""} onChange={event => community.setField("title", event.target.value)} />
           </div>
         </div>
         <div className="design-20" data-node-id="179:6282" data-name="field/내용">
@@ -72,10 +73,8 @@ export default function Component101() {
             내용
           </p>
           <div className="design-113" data-node-id="179:6284" data-name="textarea">
-            <div className="design-114" data-node-id="179:6285">
-              <p className="design-115">마음을 편하게 적어 주세요.</p>
-              <p className="design-116">경험을 나누면 다른 보호자에게 큰 힘이 돼요.</p>
-            </div>
+            <textarea className="design-input" aria-label="내용" placeholder={"마음을 편하게 적어 주세요.\n경험을 나누면 다른 보호자에게 큰 힘이 돼요."} maxLength={5000} disabled={!community.form || community.busy}
+              value={community.form?.content || ""} onChange={event => community.setField("content", event.target.value)} />
             <div className="design-117" data-node-id="179:6286" data-name="말로 쓰기">
               <div className="design-67" data-node-id="179:6287" data-name="icon/mic">
                 <div className="design-118" data-node-id="179:6288" data-name="Group">
@@ -84,9 +83,7 @@ export default function Component101() {
                   </div>
                 </div>
               </div>
-              <p className="design-56" data-node-id="179:6292">
-                말로 쓰기
-              </p>
+              <p className="design-56" data-node-id="179:6292">{community.listening ? "듣는 중…" : "말로 쓰기"}</p>
             </div>
           </div>
         </div>
@@ -99,19 +96,16 @@ export default function Component101() {
             </div>
           </div>
           <div className="design-121" data-node-id="179:6298" data-name="t">
-            <p className="design-122" data-node-id="179:6299">
-              부끄러운 햄스터
-            </p>
+            <p className="design-122" data-node-id="179:6299">{community.session?.nickname || "닉네임 확인 중…"}</p>
             <p className="design-123" data-node-id="179:6300">
               익명 닉네임으로 올라가요
             </p>
           </div>
         </div>
+        {community.formError && <p className="design-41" role="alert">{community.formError}</p>}
         <div className="design-45" data-node-id="179:6301" data-name="spacer" />
-        <a className="design-124" data-node-id="179:6302" data-name="Button (앱 화면)">
-          <p className="design-125" data-node-id="I179:6302;24:968">
-            글 올리기
-          </p>
+        <a className="design-124" data-node-id="179:6302" data-name="Button (앱 화면)" disabled={community.busy || !community.form || !!community.formError} aria-busy={community.busy} onClick={community.save}>
+          <p className="design-125" data-node-id="I179:6302;24:968">{community.busy ? "저장 중…" : community.editId ? "수정 완료" : "글 올리기"}</p>
         </a>
       </div>
     </div>;
