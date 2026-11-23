@@ -1163,6 +1163,21 @@
 .date-picker-today{display:block;margin:16px 0 0 auto;padding:8px 14px;color:#38852a;font-weight:700;}
 .calendar-event-dots{height:5px;min-width:5px;display:flex;justify-content:center;gap:3px;overflow:visible;}
 .calendar-event-dots span{width:5px;height:5px;flex:0 0 5px;border-radius:50%;background:#4ba637;}
+.calendar-event-dots .calendar-dot-medicine{background:#f04438;}
+.calendar-event-dots .calendar-dot-hospital{background:#ffca3a;}
+.calendar-event-dots .calendar-dot-family{background:#4585f5;}
+[data-screen="home"] [data-node-id="179:6745"],
+[data-screen="calendar"] [data-node-id="220:6194"]{background:#f04438;}
+[data-screen="home"] [data-node-id="186:10076"],
+[data-screen="calendar"] [data-node-id="220:6205"]{background:#ffca3a;}
+[data-screen="home"] [data-node-id="186:10124"],
+[data-screen="calendar"] [data-node-id="220:6460"]{background:#4585f5;}
+[data-screen="home"] [data-node-id="179:6745"] img,
+[data-screen="home"] [data-node-id="186:10076"] img,
+[data-screen="home"] [data-node-id="186:10124"] img,
+[data-screen="calendar"] [data-node-id="220:6194"] img,
+[data-screen="calendar"] [data-node-id="220:6205"] img,
+[data-screen="calendar"] [data-node-id="220:6460"] img{filter:brightness(0) invert(1);}
 [data-screen="calendar"] .design-198,[data-screen="family-calendar"] .design-198{overflow:visible;}
 [data-screen="verify"] .design-111{gap:28px;}
 [data-screen="verify"] .design-291{gap:0;}
