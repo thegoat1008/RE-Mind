@@ -89,17 +89,17 @@ function CalendarMonth({ children, ...props }) {
           const day = week * 7 + weekday - leading + 1
           if (day < 1 || day > days) return <div className="design-197" key={weekday} />
           const date = `${app.calendarMonth}-${String(day).padStart(2, '0')}`
-          const eventCount = app.events.filter((event) =>
+          const dayEvents = app.events.filter((event) =>
             (app.screen !== 'family-calendar' || event.id !== 'family') && occursOn(event, date)
-          ).length
+          )
           const selected = app.selectedDate === date
           return <div className="design-198" key={weekday}>
             <button type="button" className={selected ? 'design-202' : 'design-199'} data-choice="date" data-name="calendar-day"
               aria-label={`${month}월 ${day}일`} aria-pressed={app.selectedDate === date} onClick={() => app.selectDate(date)}>
               <p className={selected ? 'design-73' : 'design-190'}>{day}</p>
             </button>
-            <div className="calendar-event-dots" aria-label={eventCount ? `${eventCount}개 일정` : undefined}>
-              {Array.from({ length: eventCount }, (_, index) => <span key={index} />)}
+            <div className="calendar-event-dots" aria-label={dayEvents.length ? `${dayEvents.length}개 일정` : undefined}>
+              {dayEvents.map((event) => <span key={event.id} className={`calendar-dot-${event.id === 'morning' ? 'medicine' : event.id === 'hospital' ? 'hospital' : event.id === 'family' ? 'family' : 'other'}`} />)}
             </div>
           </div>
         })}
