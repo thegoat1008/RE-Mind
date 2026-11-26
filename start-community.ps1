@@ -1,10 +1,15 @@
-param([switch]$NoBrowser, [ValidateSet('H2', 'MySQL')][string]$Database = 'H2')
+param([switch]$NoBrowser, [ValidateSet('H2', 'MySQL')][string]$Database = 'H2', [switch]$Lan)
 $ErrorActionPreference = 'Stop'
 $projectPath = $PSScriptRoot
 $frontendPath = Join-Path $projectPath 'frontend'
 $backendPath = Join-Path $projectPath 'backend'
 $logPath = Join-Path $projectPath 'verification'
 $statePath = Join-Path $projectPath '.community-processes.json'
+# Build outside OneDrive: OneDrive placeholders can make Gradle fail to clean backend/build.
+# One folder per project copy so two copies never overwrite each other's jar.
+$projectKey = [BitConverter]::ToString([Security.Cryptography.SHA256]::Create().ComputeHash([Text.Encoding]::UTF8.GetBytes($projectPath.ToLowerInvariant()))).Replace('-', '').Substring(0, 12)
+$buildPath = Join-Path $env:LOCALAPPDATA "remind-build\$projectKey\backend"
+$viteHost = if ($Lan) { '0.0.0.0' } else { '127.0.0.1' }
 $springProfile = if ($Database -eq 'MySQL') { 'community-mysql' } else { 'community-local' }
 $nodeCommand = (Get-Command node -ErrorAction Stop).Source
 $javaCommand = (Get-Command java -ErrorAction Stop).Source
@@ -31,14 +36,14 @@ try {
 } finally { Pop-Location }
 Push-Location -LiteralPath $backendPath
 try {
-    & .\gradlew.bat --gradle-user-home ..\.gradle-user bootJar --no-daemon
+    & .\gradlew.bat --gradle-user-home ..\.gradle-user bootJar --no-daemon "-PbuildDirOverride=$buildPath"
     if ($LASTEXITCODE -ne 0) { throw 'Backend build failed.' }
 } finally { Pop-Location }
-$jarPath = Join-Path $backendPath 'build/libs/remind-backend-0.0.1-SNAPSHOT.jar'
+$jarPath = Join-Path $buildPath 'libs/remind-backend-0.0.1-SNAPSHOT.jar'
 $vitePath = Join-Path $frontendPath 'node_modules/vite/bin/vite.js'
 $backendProcess = Start-Process -FilePath $javaCommand -ArgumentList @('-jar', ('"' + $jarPath + '"'), "--spring.profiles.active=$springProfile") -WorkingDirectory $backendPath -WindowStyle Hidden -PassThru -RedirectStandardOutput (Join-Path $logPath 'backend.out.log') -RedirectStandardError (Join-Path $logPath 'backend.err.log')
 try {
-    $frontendProcess = Start-Process -FilePath $nodeCommand -ArgumentList @(('"' + $vitePath + '"'), '--mode', 'community', '--host', '127.0.0.1', '--port', '5180', '--strictPort') -WorkingDirectory $frontendPath -WindowStyle Hidden -PassThru -RedirectStandardOutput (Join-Path $logPath 'frontend.out.log') -RedirectStandardError (Join-Path $logPath 'frontend.err.log')
+    $frontendProcess = Start-Process -FilePath $nodeCommand -ArgumentList @(('"' + $vitePath + '"'), '--mode', 'community', '--host', $viteHost, '--port', '5180', '--strictPort') -WorkingDirectory $frontendPath -WindowStyle Hidden -PassThru -RedirectStandardOutput (Join-Path $logPath 'frontend.out.log') -RedirectStandardError (Join-Path $logPath 'frontend.err.log')
 } catch {
     Stop-Process -Id $backendProcess.Id -ErrorAction SilentlyContinue
     throw
@@ -48,7 +53,7 @@ $ready = $false
 for ($attempt = 0; $attempt -lt 35; $attempt++) {
     try {
         $health = Invoke-RestMethod 'http://127.0.0.1:8081/api/health' -TimeoutSec 2
-        $page = Invoke-WebRequest 'http://127.0.0.1:5180/' -TimeoutSec 2
+        $page = Invoke-WebRequest 'http://127.0.0.1:5180/' -TimeoutSec 2 -UseBasicParsing
         if ($health.status -eq 'ok' -and $page.StatusCode -eq 200) { $ready = $true; break }
     } catch { Start-Sleep -Seconds 1 }
 }
@@ -57,4 +62,8 @@ if (-not $ready) {
     throw "Preview did not start. Check logs in $logPath"
 }
 Write-Host 'Community preview: http://127.0.0.1:5180/#/community'
+if ($Lan) {
+    Get-NetIPAddress -AddressFamily IPv4 | Where-Object { $_.IPAddress -notlike '127.*' -and $_.IPAddress -notlike '169.254*' } |
+        ForEach-Object { Write-Host "Other devices on the same Wi-Fi: http://$($_.IPAddress):5180/#/community" }
+}
 if (-not $NoBrowser) { Start-Process 'http://127.0.0.1:5180/#/community' }
