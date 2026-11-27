@@ -4,6 +4,11 @@ plugins {
     id 'io.spring.dependency-management' version '1.1.7'
 }
 
+// OneDrive 폴더 안에서는 build 폴더 삭제가 실패할 수 있어 -PbuildDirOverride=<경로>로 바깥에 빌드할 수 있습니다.
+if (project.hasProperty('buildDirOverride')) {
+    layout.buildDirectory = file(project.property('buildDirOverride'))
+}
+
 group = 'com.remind'
 version = '0.0.1-SNAPSHOT'
 

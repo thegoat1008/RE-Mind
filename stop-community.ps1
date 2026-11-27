@@ -8,7 +8,7 @@ $records = Get-Content -LiteralPath $statePath -Raw -Encoding UTF8 | ConvertFrom
 foreach ($record in $records) {
     $processInfo = Get-CimInstance Win32_Process -Filter "ProcessId = $([int]$record.id)" -ErrorAction SilentlyContinue
     # Check the command line before stopping a potentially reused process ID.
-    if ($processInfo -and $processInfo.CommandLine -and $processInfo.Name -in @('java.exe', 'node.exe') -and $processInfo.CommandLine.Contains([string]$record.marker) -and ([string]$record.marker).StartsWith($PSScriptRoot, [StringComparison]::OrdinalIgnoreCase)) {
+    if ($processInfo -and $processInfo.CommandLine -and $processInfo.Name -in @('java.exe', 'node.exe') -and $processInfo.CommandLine.Contains([string]$record.marker) -and (([string]$record.marker).StartsWith($PSScriptRoot, [StringComparison]::OrdinalIgnoreCase) -or ([string]$record.marker).StartsWith((Join-Path $env:LOCALAPPDATA 'remind-build'), [StringComparison]::OrdinalIgnoreCase))) {
         Stop-Process -Id ([int]$record.id)
     }
 }
