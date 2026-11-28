@@ -15,7 +15,7 @@ const imgIconChevL = `/assets/figma-v2/905bb.svg`;
 const imgIconMic = `/assets/figma-v2/876c8.svg`;
 const imgIconSend = `/assets/figma-v2/7e014.svg`;
 const imgIconHeart = `/assets/figma-v2/54f0f.svg`;
-const imgIconHeartOutline = `/assets/figma-v2/03bff.svg`;
+const imgIconHeartOutline = `/assets/heart-outline-gray.svg`;
 const imgIconMsg = `/assets/figma-v2/38131.svg`;
 export default function Component102() {
   const community = useCommunityData();

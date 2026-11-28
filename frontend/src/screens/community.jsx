@@ -14,6 +14,7 @@ const img941 = `/assets/figma-v2/a1382.svg`;
 const imgIconSearch = `/assets/figma-v2/21312.svg`;
 const imgIconEdit = `/assets/figma-v2/2bcc5.svg`;
 const imgIconHeart = `/assets/figma-v2/00b0e.svg`;
+const imgIconHeartOutline = `/assets/heart-outline-gray.svg`;
 const imgIconMsg = `/assets/figma-v2/0cf73.svg`;
 const imgGroup = `/assets/figma-v2/492e0.svg`;
 const imgGroup1 = `/assets/figma-v2/9a8d3.svg`;
@@ -101,7 +102,7 @@ export default function Component10() {
             <p className="design-143" data-node-id="179:6327" data-live-text="true">{post.title}</p>
             <div className="design-144" data-node-id="179:6328" data-name="Frame">
               <div className="design-145" data-node-id="179:6329" data-name="icon/heart">
-                <img alt="" className="design-5" src={imgIconHeart} />
+                <img alt="" className="design-5" src={post.liked ? imgIconHeart : imgIconHeartOutline} />
               </div>
               <p className="design-146" data-node-id="179:6331">{post.likeCount}</p>
               <div className="design-147" data-node-id="179:6332" data-name="Rectangle" />

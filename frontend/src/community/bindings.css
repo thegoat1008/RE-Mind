@@ -12,6 +12,10 @@
 [data-community-live="true"] [aria-disabled="true"] { opacity: .5; cursor: wait; }
 [data-screen="community"] [data-community-list] { flex: 0 1 447px; min-height: 0; height: 447px; max-height: 447px; }
 [data-screen="community"] [data-community-card] .design-144 { height: 24px; gap: 4px; }
+[data-screen="community"] [data-community-card] .design-139 { overflow: visible; gap: 8px; }
+[data-screen="community"] [data-community-card] [data-node-id="179:6326"] { width: auto; height: auto; max-width: calc(100% - 100px); min-width: 0; white-space: normal; overflow-wrap: anywhere; text-align: right; }
+[data-screen="community"] [data-community-card] .design-144 { height: auto; min-height: 24px; overflow: visible; }
+[data-screen="community"] [data-community-card] [data-node-id="179:6337"] { width: auto; height: auto; max-width: 100%; min-width: 0; margin-left: auto; white-space: normal; overflow-wrap: anywhere; text-align: right; }
 [data-community-card] .design-144 { flex-wrap: wrap; }
 [data-community-card] .design-146,
 [data-community-live="true"] [data-name="반응"] > p { width: auto; height: auto; }
